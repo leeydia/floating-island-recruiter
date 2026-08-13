@@ -1,0 +1,102 @@
+.landmarkContext {
+  position: absolute;
+  top: clamp(7.3rem, 13vw, 10.4rem);
+  left: clamp(1.5rem, 3vw, 3rem);
+  z-index: 9;
+  width: clamp(13.25rem, 19vw, 17rem);
+  animation: contextIn var(--duration-medium) var(--ease-calm) 650ms both;
+}
+
+.legend {
+  margin-top: 0.75rem;
+  padding: 0.72rem 0.8rem 0.78rem;
+  border: 1px solid rgba(61, 92, 74, 0.12);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 5px 20px rgba(44, 62, 53, 0.075);
+  backdrop-filter: blur(11px);
+}
+
+.heading {
+  margin-bottom: 0.58rem;
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.items {
+  display: grid;
+  gap: 0.48rem;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.52rem;
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.055em;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+}
+
+.icon {
+  display: grid;
+  width: 1.45rem;
+  height: 1.45rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.icon svg {
+  width: 0.92rem;
+  height: 0.92rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.architecture .icon {
+  color: #ad6058;
+}
+
+.branding .icon {
+  color: #5d86ae;
+}
+
+.visualization .icon {
+  color: #5d896d;
+}
+
+@keyframes contextIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 899px) {
+  .landmarkContext {
+    top: 7.1rem;
+    width: 13.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landmarkContext {
+    animation-delay: 0ms;
+  }
+}

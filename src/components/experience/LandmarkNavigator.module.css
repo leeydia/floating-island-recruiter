@@ -1,0 +1,190 @@
+.wrapper {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wrapperVisible {
+  animation: navigatorIn 360ms var(--ease-calm) 100ms both;
+}
+
+.wrapperVisible:nth-child(2) {
+  animation-delay: 145ms;
+}
+
+.wrapperVisible:nth-child(3) {
+  animation-delay: 190ms;
+}
+
+.wrapperVisible:nth-child(4) {
+  animation-delay: 235ms;
+}
+
+.wrapperVisible:nth-child(5) {
+  animation-delay: 280ms;
+}
+
+@keyframes navigatorIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.leaderSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.leaderLine {
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  transition: stroke var(--duration-fast) var(--ease-calm);
+}
+
+.leaderActive {
+  stroke: var(--color-sky-blue);
+}
+
+.navigator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  border: none;
+  background: transparent;
+  pointer-events: none;
+}
+
+.labelTarget,
+.anchorTarget {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.labelTarget {
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-md);
+  transition: transform var(--duration-fast) var(--ease-calm);
+}
+
+.anchorTarget {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+}
+
+.navigator:disabled .labelTarget,
+.navigator:disabled .anchorTarget {
+  cursor: default;
+  pointer-events: none;
+}
+
+.navigator:hover .labelTarget,
+.navigator:focus-visible .labelTarget,
+.selected .labelTarget {
+  transform: translate(-50%, -50%) scale(1.035);
+}
+
+.navigator:focus-visible {
+  outline: none;
+}
+
+.navigator:focus-visible .labelTarget {
+  outline: 2px solid var(--color-sky-blue);
+  outline-offset: 3px;
+}
+
+.navigator:hover .labelSurface,
+.navigator:focus-visible .labelSurface,
+.selected .labelSurface {
+  box-shadow:
+    0 0 0 1px var(--color-ui-border),
+    0 4px 20px var(--color-navigator-glow);
+}
+
+.labelSurface {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-ui-surface);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px var(--color-ui-shadow);
+  transition:
+    box-shadow var(--duration-fast) var(--ease-calm),
+    background-color var(--duration-fast) var(--ease-calm);
+}
+
+.number {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: var(--navigator-label-size);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.anchor {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  background: transparent;
+  box-shadow: 0 0 0 0 var(--color-navigator-glow);
+  transition:
+    box-shadow var(--duration-fast) var(--ease-calm),
+    border-color var(--duration-fast) var(--ease-calm);
+}
+
+.navigator:hover .anchor,
+.navigator:focus-visible .anchor,
+.anchorActive {
+  border-color: var(--color-sky-blue);
+  box-shadow:
+    0 0 0 4px var(--color-navigator-glow),
+    0 0 12px var(--color-navigator-active);
+}
+
+.wrapper:has(.navigator:hover) .leaderLine,
+.wrapper:has(.navigator:focus-visible) .leaderLine {
+  stroke: var(--color-sky-blue);
+}
+
+@media (max-width: 900px) {
+  .labelTarget {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .anchorTarget {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapperVisible {
+    animation-duration: 150ms;
+    animation-delay: 0ms;
+  }
+}

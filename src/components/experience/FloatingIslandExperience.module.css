@@ -1,0 +1,182 @@
+.experience {
+  --parallax-background-x: 0px;
+  --parallax-island-x: 0px;
+  --parallax-cloud-x: 0px;
+
+  position: relative;
+  width: 100%;
+  min-width: 320px;
+  min-height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--color-bg-warm);
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--color-bg-warm);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.985);
+  transition:
+    opacity var(--duration-slow) var(--ease-calm),
+    transform var(--duration-slow) var(--ease-calm);
+}
+
+.sceneVisible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.sceneEntering {
+  transition-duration: 900ms, 1200ms;
+}
+
+.backgroundLayer {
+  position: absolute;
+  inset: -2.5rem;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 43%, rgba(255, 255, 255, 0.76), transparent 35%),
+    radial-gradient(circle at 14% 15%, rgba(255, 249, 237, 0.72), transparent 30%),
+    linear-gradient(155deg, var(--color-bg-gradient-start), var(--color-bg-gradient-end));
+  transform: translate3d(var(--parallax-background-x), 0, 0) scale(1.02);
+  will-change: transform;
+}
+
+.dotFieldLayer {
+  position: absolute;
+  inset: -2rem;
+  z-index: 1;
+  transform: translate3d(var(--parallax-background-x), 0, 0);
+  will-change: transform;
+}
+
+.islandStage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  transform: translate3d(var(--parallax-island-x), 0, 0);
+  will-change: transform;
+}
+
+.sceneCamera {
+  --scene-scale: 1;
+  --scene-translate-x: 0%;
+  --scene-translate-y: 0%;
+
+  position: relative;
+  width: min(85vw, 1400px, 140vh);
+  aspect-ratio: 16 / 9;
+  transform: translate3d(
+      var(--scene-translate-x),
+      var(--scene-translate-y),
+      0
+    )
+    scale(var(--scene-scale));
+  transform-origin: center;
+  transition: transform var(--duration-slow) var(--ease-calm);
+  will-change: transform;
+}
+
+.islandFrame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  opacity: 0;
+  transform: translateY(8px) scale(0.992);
+  transition:
+    opacity var(--duration-medium) var(--ease-calm),
+    transform var(--duration-slow) var(--ease-calm);
+}
+
+.islandReady {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.cloudParallaxLayer {
+  position: absolute;
+  inset: -1rem;
+  z-index: 3;
+  transform: translate3d(var(--parallax-cloud-x), 0, 0);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.navigatorLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--duration-medium) var(--ease-calm),
+    visibility 0s linear var(--duration-medium);
+}
+
+.navigatorLayerVisible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0ms;
+}
+
+.globalUi {
+  --wordmark-size: clamp(1.38rem, 1.9vw, 2rem);
+
+  position: absolute;
+  top: clamp(1.35rem, 2.5vw, 2.35rem);
+  right: clamp(1.35rem, 2.75vw, 2.75rem);
+  z-index: 10;
+}
+
+.globalUi::before {
+  position: absolute;
+  inset: -1.75rem -2.15rem;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(247, 245, 240, 0.94) 0%,
+    rgba(247, 245, 240, 0.72) 38%,
+    rgba(247, 245, 240, 0.3) 58%,
+    transparent 76%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .sceneCamera {
+    width: min(95vw, 120vh);
+  }
+}
+
+@media (min-width: 1600px) {
+  .sceneCamera {
+    width: min(78vw, 1400px, 140vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene,
+  .islandFrame,
+  .sceneCamera {
+    transition-duration: 250ms;
+  }
+
+  .backgroundLayer,
+  .dotFieldLayer,
+  .islandStage,
+  .cloudParallaxLayer {
+    transform: none;
+    will-change: auto;
+  }
+}

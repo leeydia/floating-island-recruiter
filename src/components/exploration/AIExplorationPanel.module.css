@@ -1,0 +1,105 @@
+.project h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 560;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.metadata {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 1.2rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(61, 92, 74, 0.14);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.metadata div {
+  min-width: 0;
+}
+
+.metadata dt,
+.eyebrow {
+  font-size: 0.54rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.metadata dd {
+  margin-top: 0.2rem;
+  font-size: 0.76rem;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}
+
+.introduction {
+  max-width: 42rem;
+  margin-top: 1.5rem;
+  font-size: clamp(0.9rem, 1.15vw, 1rem);
+  color: var(--color-text-secondary);
+  line-height: 1.68;
+}
+
+.process {
+  margin-top: clamp(3.5rem, 7vh, 5.5rem);
+  padding-top: 2rem;
+  border-top: 1px solid rgba(61, 92, 74, 0.14);
+}
+
+.process h3 {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 2.6vw, 2.35rem);
+  font-weight: 560;
+  letter-spacing: -0.025em;
+}
+
+.process > p:not(.eyebrow) {
+  max-width: 38rem;
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+}
+
+.process ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 1.35rem;
+  list-style: none;
+  counter-reset: process;
+}
+
+.process li {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.8rem;
+  border-left: 2px solid rgba(126, 184, 212, 0.56);
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+  background: rgba(232, 239, 244, 0.44);
+  counter-increment: process;
+}
+
+.process li::before {
+  color: var(--color-text-muted);
+  content: counter(process, decimal-leading-zero);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 899px) {
+  .metadata,
+  .process ol {
+    grid-template-columns: 1fr;
+  }
+}

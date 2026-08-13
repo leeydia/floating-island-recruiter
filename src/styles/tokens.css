@@ -1,0 +1,65 @@
+:root {
+  /* Background & atmosphere */
+  --color-bg-warm: #f4efe8;
+  --color-bg-sky: #e8eff4;
+  --color-bg-gradient-start: #f8f4ee;
+  --color-bg-gradient-end: #e4edf3;
+
+  /* Neutrals & UI */
+  --color-text-primary: #2c3e35;
+  --color-text-secondary: #5a6b62;
+  --color-text-muted: #7a8a82;
+  --color-ui-surface: rgba(255, 255, 255, 0.72);
+  --color-ui-surface-strong: rgba(255, 255, 255, 0.88);
+  --color-ui-border: rgba(255, 255, 255, 0.6);
+  --color-ui-shadow: rgba(44, 62, 53, 0.08);
+
+  /* Accent palette from PRD */
+  --color-forest-green: #3d5c4a;
+  --color-stone-grey: #8a9490;
+  --color-sky-blue: #7eb8d4;
+  --color-lake-blue: #5a9ec4;
+  --color-earth-brown: #8b7355;
+
+  /* Interactive Dot Field */
+  --color-dot: #5b96d2;
+  --color-dot-highlight: #78afe0;
+
+  /* Navigator glow */
+  --color-navigator-glow: rgba(126, 184, 212, 0.45);
+  --color-navigator-active: rgba(126, 184, 212, 0.65);
+
+  /* Cloud & overlay */
+  --color-cloud: rgba(255, 255, 255, 0.92);
+  --color-cloud-soft: rgba(255, 255, 255, 0.55);
+  --color-haze: rgba(255, 255, 255, 0.35);
+
+  /* Typography */
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-display: var(--font-cormorant), Georgia, serif;
+
+  /* Spacing & radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-calm: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 200ms;
+  --duration-medium: 400ms;
+  --duration-slow: 1600ms;
+
+  /* Layout */
+  --min-viewport: 768px;
+  --wordmark-size: clamp(1.45rem, 2.15vw, 2.35rem);
+  --navigator-label-size: clamp(0.65rem, 0.85vw, 0.75rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-medium: 150ms;
+    --duration-slow: 300ms;
+  }
+}

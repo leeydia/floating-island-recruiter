@@ -1,0 +1,207 @@
+.navigation {
+  position: absolute;
+  top: clamp(1.5rem, 3vw, 2.75rem);
+  left: clamp(1.5rem, 3vw, 3rem);
+  z-index: 10;
+  width: clamp(13.25rem, 17vw, 15rem);
+  animation: navigationIn var(--duration-medium) var(--ease-calm) 500ms both;
+}
+
+.contextLabel {
+  display: block;
+  margin: 0 0 0.4rem 0.8rem;
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--color-text-secondary);
+  text-shadow:
+    0 1px 5px rgba(255, 255, 255, 0.95),
+    0 0 12px rgba(255, 255, 255, 0.82);
+  text-transform: uppercase;
+}
+
+.trigger {
+  display: grid;
+  width: 100%;
+  min-height: 3.7rem;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.72rem;
+  padding: 0.62rem 0.85rem;
+  appearance: none;
+  border: 1px solid rgba(61, 92, 74, 0.13);
+  border-radius: var(--radius-md);
+  background: rgba(255, 252, 247, 0.88);
+  box-shadow: 0 5px 20px rgba(44, 62, 53, 0.075);
+  backdrop-filter: blur(11px);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color var(--duration-fast) var(--ease-calm),
+    background-color var(--duration-fast) var(--ease-calm),
+    box-shadow var(--duration-fast) var(--ease-calm);
+}
+
+.trigger:hover,
+.trigger:focus-visible,
+.trigger[aria-expanded="true"] {
+  border-color: rgba(90, 158, 196, 0.38);
+  background: rgba(255, 252, 247, 0.95);
+  box-shadow:
+    0 0 0 1px rgba(126, 184, 212, 0.14),
+    0 7px 24px rgba(44, 62, 53, 0.09);
+}
+
+.trigger:focus-visible,
+.option:focus-visible {
+  outline: 2px solid var(--color-sky-blue);
+  outline-offset: 3px;
+}
+
+.number,
+.optionNumber {
+  font-family: var(--font-sans);
+  font-size: 0.59rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.currentText,
+.optionText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.destination,
+.optionText strong {
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  color: var(--color-text-primary);
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.destination {
+  font-size: 1.18rem;
+}
+
+.landmark,
+.optionText span {
+  margin-top: 0.2rem;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  color: var(--color-text-secondary);
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.chevron {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-right: 1.25px solid currentColor;
+  border-bottom: 1.25px solid currentColor;
+  color: var(--color-text-secondary);
+  transform: translateY(-0.15rem) rotate(45deg);
+  transition: transform var(--duration-fast) var(--ease-calm);
+}
+
+.chevronOpen {
+  transform: translateY(0.15rem) rotate(225deg);
+}
+
+.menu {
+  display: grid;
+  gap: 0.15rem;
+  margin-top: 0.45rem;
+  padding: 0.35rem;
+  list-style: none;
+  border: 1px solid rgba(61, 92, 74, 0.12);
+  border-radius: var(--radius-md);
+  background: rgba(255, 252, 247, 0.9);
+  box-shadow: 0 12px 38px rgba(44, 62, 53, 0.12);
+  backdrop-filter: blur(14px);
+  animation: menuIn var(--duration-fast) var(--ease-calm) both;
+}
+
+.option {
+  display: grid;
+  width: 100%;
+  min-height: 2.9rem;
+  grid-template-columns: 1.35rem 1fr auto;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.55rem;
+  appearance: none;
+  border: 0;
+  border-radius: calc(var(--radius-sm) + 1px);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    color var(--duration-fast) var(--ease-calm),
+    background-color var(--duration-fast) var(--ease-calm);
+}
+
+.option:hover,
+.option:focus-visible {
+  background: rgba(126, 184, 212, 0.13);
+}
+
+.optionCurrent {
+  background: rgba(61, 92, 74, 0.08);
+}
+
+.optionText strong {
+  font-size: 0.95rem;
+}
+
+.optionText span {
+  font-size: 0.48rem;
+}
+
+.currentMark {
+  font-size: 0.48rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-forest-green);
+  text-transform: uppercase;
+}
+
+@keyframes navigationIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.4rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navigation {
+    animation-delay: 0ms;
+  }
+}

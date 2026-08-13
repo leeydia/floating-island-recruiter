@@ -1,0 +1,234 @@
+.welcome {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  min-width: 320px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.welcome::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.98), transparent 43%),
+    linear-gradient(155deg, var(--color-bg-gradient-start), var(--color-bg-sky));
+  content: "";
+  opacity: 1;
+  transition: opacity var(--duration-slow) var(--ease-calm);
+}
+
+.content {
+  --wordmark-size: clamp(3rem, 7.2vw, 6.65rem);
+
+  position: relative;
+  z-index: 30;
+  display: flex;
+  width: min(88vw, 42rem);
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.welcomeWordmark {
+  margin-bottom: clamp(3.35rem, 8.3vh, 6rem);
+}
+
+.copy {
+  display: flex;
+  max-width: 31rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.greeting {
+  margin: 0 0 1.15rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 2.9vw, 2.45rem);
+  font-weight: 550;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.body,
+.closing {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.35vw, 1.05rem);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  text-wrap: balance;
+}
+
+.closing {
+  margin-top: 0.7rem;
+  color: var(--color-text-primary);
+}
+
+.loading {
+  display: grid;
+  width: min(12.75rem, 62vw);
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: clamp(2.45rem, 5.8vh, 3.8rem);
+  opacity: 0.72;
+}
+
+.progressTrack {
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: rgba(44, 62, 53, 0.12);
+}
+
+.progressValue {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: rgba(61, 92, 74, 0.58);
+  transition: width var(--duration-medium) var(--ease-calm);
+}
+
+.loadingLabel {
+  min-width: 2.5rem;
+  font-size: 0.62rem;
+  font-weight: 550;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.enterButton {
+  min-width: 9.35rem;
+  min-height: 2.65rem;
+  margin-top: 1.25rem;
+  padding: 0.62rem 1.2rem;
+  border: 1px solid rgba(61, 92, 74, 0.38);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 0.5rem 1.4rem rgba(44, 62, 53, 0.08);
+  color: var(--color-forest-green);
+  font-size: 0.7rem;
+  font-weight: 620;
+  letter-spacing: 0.095em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--ease-calm),
+    background-color var(--duration-fast) var(--ease-calm),
+    box-shadow var(--duration-fast) var(--ease-calm),
+    opacity var(--duration-fast) var(--ease-calm);
+}
+
+.enterButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: var(--color-forest-green);
+  box-shadow: 0 0.65rem 1.65rem rgba(44, 62, 53, 0.14);
+  color: #fff;
+}
+
+.enterButton:focus-visible,
+.retryButton:focus-visible {
+  outline: 2px solid var(--color-sky-blue);
+  outline-offset: 4px;
+}
+
+.enterButton:disabled {
+  border-color: rgba(90, 107, 98, 0.16);
+  background: rgba(90, 107, 98, 0.22);
+  box-shadow: none;
+  cursor: wait;
+  opacity: 0.78;
+}
+
+.error {
+  position: absolute;
+  top: calc(100% + 1.15rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #74483f;
+}
+
+.retryButton {
+  min-width: 6.5rem;
+  min-height: 2.5rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid rgba(116, 72, 63, 0.32);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.64);
+  color: inherit;
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.entering {
+  pointer-events: none;
+}
+
+.entering::before {
+  opacity: 0;
+  transition-duration: 900ms;
+}
+
+.entering .content {
+  animation: contentDepart 700ms var(--ease-calm) forwards;
+}
+
+@keyframes contentDepart {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 900px) {
+  .content {
+    --wordmark-size: clamp(2.8rem, 9vw, 4.75rem);
+  }
+
+  .welcomeWordmark {
+    margin-bottom: clamp(2.75rem, 7vh, 4.5rem);
+  }
+}
+
+@media (max-height: 700px) {
+  .content {
+    --wordmark-size: clamp(2.35rem, 7.8vh, 4rem);
+  }
+
+  .welcomeWordmark {
+    margin-bottom: 2.15rem;
+  }
+
+  .loading {
+    margin-top: 1.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome,
+  .welcome::before,
+  .progressValue,
+  .enterButton {
+    transition-duration: 150ms;
+  }
+
+  .entering .content {
+    animation-duration: 250ms;
+    transform: none;
+  }
+}

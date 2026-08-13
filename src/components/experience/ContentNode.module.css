@@ -1,0 +1,205 @@
+.node {
+  --node-scale: 1;
+  --content-node-icon: #26372e;
+  --content-node-ring: rgba(176, 132, 62, 0.82);
+  --content-node-glow: rgba(211, 166, 88, 0.3);
+  --content-node-glow-strong: rgba(211, 166, 88, 0.44);
+
+  position: absolute;
+  top: var(--node-y);
+  left: var(--node-x);
+  z-index: 7;
+  display: flex;
+  min-width: 5rem;
+  min-height: 5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.38rem;
+  padding: 0.75rem;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform: translate(-50%, -50%) scale(var(--node-scale));
+  transition: transform var(--duration-fast) var(--ease-calm);
+}
+
+.iconSurface {
+  position: relative;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1.5px solid var(--content-node-ring);
+  border-radius: 50%;
+  color: var(--content-node-icon);
+  background: rgba(255, 250, 242, 0.9);
+  box-shadow:
+    0 0 0 3px rgba(244, 218, 169, 0.32),
+    0 0 18px var(--content-node-glow),
+    0 4px 14px rgba(44, 62, 53, 0.2);
+  backdrop-filter: blur(9px) saturate(1.06);
+  transition:
+    border-color var(--duration-fast) var(--ease-calm),
+    background-color var(--duration-fast) var(--ease-calm),
+    box-shadow var(--duration-fast) var(--ease-calm);
+}
+
+.iconSurface::after {
+  position: absolute;
+  right: 0.14rem;
+  bottom: 0.04rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-right: 1.5px solid var(--content-node-ring);
+  border-bottom: 1.5px solid var(--content-node-ring);
+  background: rgba(255, 250, 242, 0.9);
+  content: "";
+  transform: translate(32%, 34%) rotate(45deg);
+}
+
+.iconSurface svg {
+  position: relative;
+  z-index: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.accentSurface .iconSurface {
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.96);
+  color: rgba(255, 255, 255, 0.96);
+  background: var(--content-node-ring);
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.48),
+    0 0 0 7px rgba(255, 255, 255, 0.14),
+    0 0 20px var(--content-node-glow),
+    0 5px 15px rgba(44, 62, 53, 0.25);
+  backdrop-filter: none;
+}
+
+.accentSurface .iconSurface::after {
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.96);
+  background: var(--content-node-ring);
+}
+
+.label {
+  padding: 0.27rem 0.52rem;
+  border: 1px solid rgba(176, 132, 62, 0.32);
+  border-radius: var(--radius-sm);
+  font-size: 0.59rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  color: var(--color-text-primary);
+  background: rgba(255, 250, 242, 0.88);
+  box-shadow:
+    0 2px 10px rgba(44, 62, 53, 0.16),
+    0 0 10px rgba(211, 166, 88, 0.12);
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 1;
+  transition:
+    opacity var(--duration-fast) var(--ease-calm),
+    box-shadow var(--duration-fast) var(--ease-calm);
+}
+
+.visited .iconSurface {
+  color: var(--content-node-icon);
+  border-color: var(--content-node-ring);
+  background: rgba(235, 232, 220, 0.9);
+  box-shadow:
+    0 0 0 3px rgba(235, 232, 220, 0.3),
+    0 0 14px var(--content-node-glow),
+    0 3px 11px rgba(44, 62, 53, 0.15);
+  filter: saturate(0.72);
+}
+
+.visited .iconSurface::after {
+  border-color: var(--content-node-ring);
+  background: rgba(235, 232, 220, 0.9);
+}
+
+.accentSurface.visited .iconSurface {
+  border-color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9);
+  background: var(--content-node-ring);
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.38),
+    0 0 0 7px rgba(255, 255, 255, 0.1),
+    0 0 16px var(--content-node-glow),
+    0 4px 13px rgba(44, 62, 53, 0.2);
+  filter: saturate(0.66) brightness(0.9);
+}
+
+.accentSurface.visited .iconSurface::after {
+  border-color: rgba(255, 255, 255, 0.9);
+  background: var(--content-node-ring);
+}
+
+.node:hover,
+.node:focus-visible {
+  transform: translate(-50%, -50%)
+    scale(calc(var(--node-scale) * 1.06));
+}
+
+.node:hover .iconSurface,
+.node:focus-visible .iconSurface {
+  border-color: var(--content-node-ring);
+  background: rgba(255, 252, 247, 0.97);
+  box-shadow:
+    0 0 0 4px rgba(244, 218, 169, 0.4),
+    0 0 23px var(--content-node-glow-strong),
+    0 5px 16px rgba(44, 62, 53, 0.22);
+}
+
+.node:hover .iconSurface::after,
+.node:focus-visible .iconSurface::after {
+  border-color: var(--content-node-ring);
+  background: rgba(255, 252, 247, 0.97);
+}
+
+.node:hover .label,
+.node:focus-visible .label {
+  box-shadow:
+    0 4px 16px rgba(44, 62, 53, 0.18),
+    0 0 13px rgba(211, 166, 88, 0.18);
+}
+
+.accentSurface:hover .iconSurface,
+.accentSurface:focus-visible .iconSurface {
+  border-color: white;
+  color: white;
+  background: var(--content-node-ring);
+  box-shadow:
+    0 0 0 5px rgba(255, 255, 255, 0.58),
+    0 0 0 8px rgba(255, 255, 255, 0.16),
+    0 0 26px var(--content-node-glow-strong),
+    0 6px 17px rgba(44, 62, 53, 0.26);
+  filter: brightness(1.08) saturate(1.04);
+}
+
+.accentSurface:hover .iconSurface::after,
+.accentSurface:focus-visible .iconSurface::after {
+  border-color: white;
+  background: var(--content-node-ring);
+}
+
+.node:focus-visible {
+  outline: 2px solid var(--color-sky-blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+@media (max-width: 900px) {
+  .node {
+    min-width: 5.5rem;
+    min-height: 5.5rem;
+  }
+}

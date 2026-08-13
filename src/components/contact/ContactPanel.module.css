@@ -1,0 +1,87 @@
+.contact {
+  max-width: 39rem;
+}
+
+.invitation {
+  max-width: 34rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  color: var(--color-text-secondary);
+  line-height: 1.42;
+}
+
+.methods {
+  display: grid;
+  margin-top: clamp(2.75rem, 6vh, 4.5rem);
+  border-top: 1px solid rgba(61, 92, 74, 0.14);
+  list-style: none;
+}
+
+.methods a {
+  display: grid;
+  min-height: 5.5rem;
+  grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(61, 92, 74, 0.14);
+  transition:
+    padding var(--duration-fast) var(--ease-calm),
+    background-color var(--duration-fast) var(--ease-calm);
+}
+
+.methods a:hover {
+  padding-inline: 0.7rem;
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.methods a:focus-visible {
+  outline: 2px solid var(--color-sky-blue);
+  outline-offset: 3px;
+}
+
+.label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.value {
+  overflow-wrap: anywhere;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
+  font-weight: 550;
+  color: var(--color-text-primary);
+}
+
+.arrow {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 1px solid rgba(61, 92, 74, 0.17);
+  border-radius: 50%;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 899px) {
+  .methods a {
+    grid-template-columns: 1fr auto;
+    gap: 0.4rem 1rem;
+    padding-block: 1rem;
+  }
+
+  .label {
+    grid-column: 1;
+  }
+
+  .value {
+    grid-column: 1;
+  }
+
+  .arrow {
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
+}

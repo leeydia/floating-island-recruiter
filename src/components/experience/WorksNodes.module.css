@@ -1,0 +1,22 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  animation: nodesIn var(--duration-medium) var(--ease-calm) 850ms both;
+}
+
+@keyframes nodesIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer {
+    animation-delay: 0ms;
+  }
+}

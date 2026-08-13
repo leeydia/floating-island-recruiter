@@ -1,0 +1,61 @@
+.about {
+  max-width: 42rem;
+}
+
+.opening {
+  padding-bottom: clamp(2.5rem, 5vh, 4rem);
+  border-bottom: 1px solid rgba(61, 92, 74, 0.14);
+}
+
+.opening p {
+  max-width: 37rem;
+  font-size: clamp(0.9rem, 1.15vw, 1rem);
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+}
+
+.opening p + p {
+  margin-top: 1.25rem;
+}
+
+.media {
+  overflow: hidden;
+  margin-top: clamp(2.5rem, 5vh, 4rem);
+  border-radius: var(--radius-md);
+  background: rgba(61, 92, 74, 0.06);
+}
+
+.media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.resumeSection {
+  margin-top: clamp(2.5rem, 5vh, 4rem);
+}
+
+.eyebrow {
+  margin-bottom: 0.55rem;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.resumeSection h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 560;
+  letter-spacing: -0.02em;
+}
+
+.resumeSection > p:not(.eyebrow) {
+  max-width: 34rem;
+  margin-top: 0.6rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.84rem;
+  color: var(--color-text-secondary);
+  line-height: 1.68;
+}
