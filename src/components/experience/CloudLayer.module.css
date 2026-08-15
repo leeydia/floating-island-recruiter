@@ -10,182 +10,220 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(244, 241, 235, 0.38) 45%,
-    rgba(255, 255, 255, 0.46) 100%
-  );
+  background:
+    radial-gradient(
+      ellipse at 50% 48%,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(244, 241, 235, 0.24) 48%,
+      rgba(255, 255, 255, 0.34) 100%
+    );
 }
 
-.cloud {
+.revealCloud {
   position: absolute;
-  z-index: 1;
+  border-radius: 47% 53% 46% 54% / 58% 42% 56% 44%;
+  background:
+    radial-gradient(
+      ellipse at 18% 62%,
+      rgba(255, 255, 255, 0.84) 0 13%,
+      rgba(240, 243, 241, 0.57) 30%,
+      transparent 63%
+    ),
+    radial-gradient(
+      ellipse at 46% 42%,
+      rgba(255, 255, 255, 0.92) 0 17%,
+      rgba(232, 238, 238, 0.56) 35%,
+      transparent 67%
+    ),
+    radial-gradient(
+      ellipse at 76% 58%,
+      rgba(255, 253, 249, 0.82) 0 15%,
+      rgba(225, 234, 235, 0.48) 36%,
+      transparent 68%
+    );
+  filter: blur(9px);
+  pointer-events: none;
+}
+
+.revealCloud::before,
+.revealCloud::after {
+  position: absolute;
   border-radius: 50%;
+  content: "";
+}
+
+.revealCloud::before {
+  inset: 8% 12% 18% 6%;
+  background:
+    radial-gradient(
+      ellipse at 28% 55%,
+      rgba(255, 255, 255, 0.72),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse at 68% 48%,
+      rgba(255, 255, 255, 0.64),
+      transparent 64%
+    );
+  filter: blur(11px);
+}
+
+.revealCloud::after {
+  inset: 30% 2% 4% 22%;
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 255, 255, 0.98) 0%,
-    rgba(222, 231, 233, 0.72) 48%,
-    transparent 72%
+    rgba(244, 247, 246, 0.52),
+    transparent 70%
   );
-  filter: blur(12px);
-  animation: cloudDrift 14s var(--ease-calm) infinite alternate;
+  filter: blur(15px);
 }
 
-.cloudOne {
-  width: 55%;
-  height: 38%;
+.revealCloud {
+  z-index: 1;
+  animation: revealIdleDrift 22s var(--ease-calm) infinite alternate;
+}
+
+.revealOne {
+  --idle-x: 15px;
+  --idle-y: -7px;
+
   top: -8%;
-  left: -10%;
+  left: -13%;
+  width: 58%;
+  height: 40%;
+  opacity: 0.9;
+  animation-duration: 21s;
+  animation-delay: -8s;
 }
 
-.cloudTwo {
-  width: 48%;
-  height: 34%;
-  top: 8%;
-  right: -12%;
-  animation-delay: -3s;
+.revealTwo {
+  --idle-x: -13px;
+  --idle-y: 6px;
+
+  top: 6%;
+  right: -15%;
+  width: 53%;
+  height: 38%;
+  opacity: 0.88;
+  animation-duration: 26s;
+  animation-delay: -17s;
 }
 
-.cloudThree {
-  width: 62%;
-  height: 42%;
-  bottom: 10%;
-  left: 5%;
-  animation-delay: -6s;
+.revealThree {
+  --idle-x: 11px;
+  --idle-y: -5px;
+
+  bottom: 8%;
+  left: -9%;
+  width: 58%;
+  height: 39%;
+  opacity: 0.86;
+  animation-duration: 24s;
+  animation-delay: -13s;
 }
 
-.cloudFour {
-  width: 44%;
-  height: 30%;
-  bottom: -6%;
-  right: 8%;
-  animation-delay: -9s;
+.revealFour {
+  --idle-x: -10px;
+  --idle-y: -7px;
+
+  right: -7%;
+  bottom: -9%;
+  width: 52%;
+  height: 36%;
+  opacity: 0.88;
+  animation-duration: 28s;
+  animation-delay: -22s;
 }
 
-.cloudFive {
-  width: 36%;
-  height: 24%;
-  top: 38%;
-  left: 28%;
-  animation-delay: -4s;
+.revealFive {
+  --idle-x: 8px;
+  --idle-y: -10px;
+
+  top: 35%;
+  left: 30%;
+  width: 40%;
+  height: 28%;
+  opacity: 0.58;
+  animation-duration: 19s;
+  animation-delay: -5s;
 }
 
-.dispersing .cloud,
+.dispersing .revealCloud,
 .dispersing .welcomeVeil {
-  animation: cloudDisperse var(--duration-slow) var(--ease-calm) forwards;
+  animation-delay: 0s;
+  animation-duration: var(--duration-slow);
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: var(--ease-calm);
 }
 
-.dispersing .cloudOne {
-  animation-name: cloudDisperseOne;
+.dispersing .revealOne {
+  animation-name: revealDisperseLeftHigh;
 }
 
-.dispersing .cloudTwo {
-  animation-name: cloudDisperseTwo;
+.dispersing .revealTwo {
+  animation-name: revealDisperseRightHigh;
 }
 
-.dispersing .cloudThree {
-  animation-name: cloudDisperseThree;
+.dispersing .revealThree {
+  animation-name: revealDisperseLeftLow;
 }
 
-.dispersing .cloudFour {
-  animation-name: cloudDisperseFour;
+.dispersing .revealFour {
+  animation-name: revealDisperseRightLow;
 }
 
-.dispersing .cloudFive {
-  animation-name: cloudDisperseFive;
+.dispersing .revealFive {
+  animation-name: revealDisperseCenter;
 }
 
 .dispersing .welcomeVeil {
   animation-name: veilFade;
-  animation-duration: 900ms;
+  animation-duration: 1050ms;
 }
 
-.hazeLayer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.haze {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(
-    ellipse at center,
-    var(--color-cloud-soft) 0%,
-    var(--color-haze) 50%,
-    transparent 72%
-  );
-  filter: blur(12px);
-  animation: hazePulse 10s var(--ease-calm) infinite alternate;
-}
-
-.hazeLeft {
-  width: 34%;
-  height: 22%;
-  bottom: 18%;
-  left: 8%;
-}
-
-.hazeRight {
-  width: 30%;
-  height: 20%;
-  bottom: 16%;
-  right: 10%;
-  animation-delay: -4s;
-}
-
-.hazeBottom {
-  width: 50%;
-  height: 18%;
-  bottom: 8%;
-  left: 25%;
-  animation-delay: -2s;
-}
-
-@keyframes cloudDrift {
+@keyframes revealIdleDrift {
   from {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scale(0.99);
   }
 
   to {
-    transform: translate3d(12px, -8px, 0);
-  }
-}
-
-@keyframes cloudDisperseOne {
-  to {
-    opacity: 0;
-    transform: translate3d(-18%, -22%, 0) scale(1.15);
+    transform: translate3d(var(--idle-x), var(--idle-y), 0) scale(1.015);
   }
 }
 
-@keyframes cloudDisperseTwo {
+@keyframes revealDisperseLeftHigh {
   to {
-    opacity: 0;
-    transform: translate3d(20%, -18%, 0) scale(1.12);
+    opacity: 0.06;
+    transform: translate3d(-48%, -12%, 0) scale(1.07);
   }
 }
 
-@keyframes cloudDisperseThree {
+@keyframes revealDisperseRightHigh {
   to {
-    opacity: 0;
-    transform: translate3d(-10%, 24%, 0) scale(1.1);
+    opacity: 0.05;
+    transform: translate3d(50%, -8%, 0) scale(1.05);
   }
 }
 
-@keyframes cloudDisperseFour {
+@keyframes revealDisperseLeftLow {
   to {
-    opacity: 0;
-    transform: translate3d(16%, 20%, 0) scale(1.08);
+    opacity: 0.08;
+    transform: translate3d(-42%, 18%, 0) scale(1.08);
   }
 }
 
-@keyframes cloudDisperseFive {
+@keyframes revealDisperseRightLow {
   to {
-    opacity: 0;
-    transform: translate3d(0, -28%, 0) scale(1.2);
+    opacity: 0.06;
+    transform: translate3d(46%, 15%, 0) scale(1.06);
+  }
+}
+
+@keyframes revealDisperseCenter {
+  to {
+    opacity: 0.1;
+    transform: translate3d(-25%, -24%, 0) scale(1.09);
   }
 }
 
@@ -195,28 +233,25 @@
   }
 }
 
-@keyframes hazePulse {
-  from {
-    opacity: 0.62;
-    transform: scale(1);
-  }
-
+@keyframes reducedReveal {
   to {
-    opacity: 0.9;
-    transform: scale(1.04);
+    opacity: 0.08;
+    transform: scale(1.02);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cloud {
+  .revealCloud {
     animation: none;
   }
 
-  .haze {
-    animation: none;
+  .dispersing .revealCloud {
+    animation-name: reducedReveal;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: var(--ease-calm);
   }
 
-  .dispersing .cloud,
   .dispersing .welcomeVeil {
     animation-duration: 300ms;
   }

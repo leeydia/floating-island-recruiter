@@ -1,7 +1,6 @@
 .experience {
   --parallax-background-x: 0px;
   --parallax-island-x: 0px;
-  --parallax-cloud-x: 0px;
 
   position: relative;
   width: 100%;
@@ -101,15 +100,6 @@
   transform: translateY(0) scale(1);
 }
 
-.cloudParallaxLayer {
-  position: absolute;
-  inset: -1rem;
-  z-index: 3;
-  transform: translate3d(var(--parallax-cloud-x), 0, 0);
-  will-change: transform;
-  pointer-events: none;
-}
-
 .navigatorLayer {
   position: absolute;
   inset: 0;
@@ -174,8 +164,7 @@
 
   .backgroundLayer,
   .dotFieldLayer,
-  .islandStage,
-  .cloudParallaxLayer {
+  .islandStage {
     transform: none;
     will-change: auto;
   }

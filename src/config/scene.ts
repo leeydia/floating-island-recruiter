@@ -18,7 +18,6 @@ export const LANDMARK_TRANSFORMS: Record<LandmarkId, SceneTransform> = {
 export const PARALLAX = {
   islandMaxPx: 6,
   backgroundMaxPx: 3,
-  cloudMaxPx: 8,
 } as const;
 
 export const TRANSITION_DURATION_MS = {

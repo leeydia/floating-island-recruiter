@@ -108,7 +108,7 @@ export function WelcomeScreen({
         ) : null}
       </div>
 
-      <CloudLayer variant="welcome" dispersing={isEntering} />
+      <CloudLayer dispersing={isEntering} />
     </div>
   );
 }

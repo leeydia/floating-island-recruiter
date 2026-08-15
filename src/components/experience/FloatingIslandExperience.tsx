@@ -42,7 +42,6 @@ import { useExperience } from "@/context/ExperienceContext";
 import { useAssetPreloader } from "@/hooks/useAssetPreloader";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { AboutNodes } from "./AboutNodes";
-import { CloudLayer } from "./CloudLayer";
 import { ExplorationNodes } from "./ExplorationNodes";
 import { InteractiveDotField } from "./InteractiveDotField";
 import { IslandArtwork } from "./IslandArtwork";
@@ -113,8 +112,8 @@ export function FloatingIslandExperience() {
   const isContactScene = hasFocusedLandmark && selectedLandmark === "contact";
   const showNavigators =
     isIslandOverview || isMiniMapOverview || isEntering;
-  const sceneVisible = !isWelcome || isEntering;
   const sceneReady = assetsReady && islandReady;
+  const sceneVisible = sceneReady || !isWelcome || isEntering;
   const loadError = preloadError ?? islandError;
   const displayedProgress = sceneReady
     ? 100
@@ -183,7 +182,6 @@ export function FloatingIslandExperience() {
       parallaxCurrentRef.current = 0;
       rootStyle.setProperty("--parallax-background-x", "0px");
       rootStyle.setProperty("--parallax-island-x", "0px");
-      rootStyle.setProperty("--parallax-cloud-x", "0px");
       return;
     }
 
@@ -203,11 +201,6 @@ export function FloatingIslandExperience() {
         "--parallax-island-x",
         `${parallaxCurrentRef.current * PARALLAX.islandMaxPx}px`,
       );
-      rootStyle.setProperty(
-        "--parallax-cloud-x",
-        `${parallaxCurrentRef.current * PARALLAX.cloudMaxPx}px`,
-      );
-
       frameId = window.requestAnimationFrame(updateParallax);
     }
 
@@ -429,7 +422,7 @@ export function FloatingIslandExperience() {
         className={`${styles.scene} ${sceneVisible ? styles.sceneVisible : ""} ${isEntering ? styles.sceneEntering : ""}`}
         aria-label={sceneLabel}
         aria-hidden={(isWelcome && !isEntering) || isContentPanel}
-        inert={isContentPanel ? true : undefined}
+        inert={(isWelcome && !isEntering) || isContentPanel ? true : undefined}
       >
         <div className={styles.backgroundLayer} aria-hidden="true" />
 
@@ -449,9 +442,6 @@ export function FloatingIslandExperience() {
                 onReady={handleIslandReady}
                 onError={handleIslandError}
               />
-              <div className={styles.cloudParallaxLayer}>
-                <CloudLayer variant="haze" />
-              </div>
               <PavilionLabel />
               <div
                 className={`${styles.navigatorLayer} ${showNavigators ? styles.navigatorLayerVisible : ""}`}
