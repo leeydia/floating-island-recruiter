@@ -59,14 +59,6 @@
   letter-spacing: -0.025em;
 }
 
-.process > p:not(.eyebrow) {
-  max-width: 38rem;
-  margin-top: 0.75rem;
-  font-size: 0.82rem;
-  color: var(--color-text-secondary);
-  line-height: 1.65;
-}
-
 .process ol {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -78,8 +70,8 @@
 
 .process li {
   display: flex;
-  min-height: 3rem;
-  align-items: center;
+  min-height: 6rem;
+  align-items: flex-start;
   gap: 0.7rem;
   padding: 0.7rem 0.8rem;
   border-left: 2px solid rgba(126, 184, 212, 0.56);
@@ -95,6 +87,42 @@
   font-size: 0.52rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+}
+
+.process li h4 {
+  font-size: 0.72rem;
+  font-weight: 720;
+  color: var(--color-text-primary);
+  line-height: 1.45;
+}
+
+.process li p {
+  margin-top: 0.3rem;
+  font-size: 0.68rem;
+  color: var(--color-text-secondary);
+  line-height: 1.58;
+}
+
+.learning {
+  max-width: 41rem;
+  margin-top: clamp(2.75rem, 6vh, 4.5rem);
+  padding-top: 2rem;
+  border-top: 1px solid rgba(61, 92, 74, 0.14);
+}
+
+.learning h3 {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.35vw, 2.15rem);
+  font-weight: 560;
+  letter-spacing: -0.025em;
+}
+
+.learning > p:last-child {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.68;
 }
 
 @media (max-width: 899px) {

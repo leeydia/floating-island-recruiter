@@ -26,12 +26,22 @@ export function AIExplorationPanel() {
       <section className={styles.process}>
         <p className={styles.eyebrow}>Process</p>
         <h3>From idea to an evolving experience</h3>
-        <p>{AI_PROJECT.processIntroduction}</p>
         <ol>
           {AI_PROJECT.process.map((step) => (
-            <li key={step}>{step}</li>
+            <li key={step.title}>
+              <div>
+                <h4>{step.title}</h4>
+                <p>{step.description}</p>
+              </div>
+            </li>
           ))}
         </ol>
+      </section>
+
+      <section className={styles.learning}>
+        <p className={styles.eyebrow}>Reflection</p>
+        <h3>What I Learned</h3>
+        <p>{AI_PROJECT.whatILearned}</p>
       </section>
     </article>
   );

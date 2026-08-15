@@ -1,4 +1,6 @@
 import type {
+  WorksCategory,
+  WorksDetailSection,
   WorksPanelContent,
   WorksProject,
 } from "@/content/works";
@@ -9,7 +11,67 @@ interface WorksPanelProps {
   content: WorksPanelContent;
 }
 
-function Project({ project }: { project: WorksProject }) {
+function DetailSections({
+  details,
+}: {
+  details: WorksDetailSection[];
+}) {
+  return (
+    <div className={styles.detailSections}>
+      {details.map((section) => (
+        <section key={section.heading} className={styles.detailSection}>
+          <h3>{section.heading}</h3>
+          {section.paragraphs?.map((paragraph) => (
+            <p
+              key={paragraph}
+              className={section.variant === "question" ? styles.question : undefined}
+            >
+              {paragraph}
+            </p>
+          ))}
+          {section.items?.length ? (
+            <ul>
+              {section.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function ArchitectureDetails({ project }: { project: WorksProject }) {
+  if (!project.details?.length) return null;
+
+  return (
+    <details className={styles.architectureDetails}>
+      <summary>
+        <span>View Details</span>
+        <span className={styles.disclosureMark} aria-hidden="true">+</span>
+      </summary>
+      <div className={styles.architectureDetailsBody}>
+        {project.detailMetadata?.length ? (
+          <ul className={styles.projectMetadata} aria-label={`${project.name} details`}>
+            {project.detailMetadata.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        ) : null}
+        <DetailSections details={project.details} />
+      </div>
+    </details>
+  );
+}
+
+function Project({
+  project,
+  category,
+}: {
+  project: WorksProject;
+  category: WorksCategory;
+}) {
   return (
     <article className={styles.project}>
       <header className={styles.projectHeader}>
@@ -17,9 +79,7 @@ function Project({ project }: { project: WorksProject }) {
         {project.location ? (
           <p className={styles.location}>{project.location}</p>
         ) : null}
-        <p
-          className={`${styles.summary} ${project.introduction ? styles.placeholderIntroduction : ""}`}
-        >
+        <p className={styles.summary}>
           {project.introduction ?? project.summary}
         </p>
       </header>
@@ -38,7 +98,25 @@ function Project({ project }: { project: WorksProject }) {
         </section>
       ) : null}
 
-      <MediaCarousel projectName={project.name} media={project.media} />
+      <MediaCarousel
+        projectName={project.name}
+        media={project.media}
+        protectionNotice={
+          category === "visualization"
+            ? "Client Project · For Portfolio Presentation Only"
+            : undefined
+        }
+      />
+
+      {category === "architecture" ? (
+        <ArchitectureDetails project={project} />
+      ) : null}
+
+      {category === "branding" && project.details?.length ? (
+        <div className={styles.brandingDetails}>
+          <DetailSections details={project.details} />
+        </div>
+      ) : null}
     </article>
   );
 }
@@ -63,7 +141,7 @@ export function WorksPanel({ content }: WorksPanelProps) {
 
       <div className={styles.projects}>
         {content.projects.map((project) => (
-          <Project key={project.id} project={project} />
+          <Project key={project.id} project={project} category={content.category} />
         ))}
       </div>
 

@@ -65,14 +65,41 @@
   scroll-snap-align: start;
 }
 
-.image {
+.imageFrame {
+  position: relative;
+  display: grid;
   width: 100%;
-  height: auto;
-  max-height: min(56vh, 37rem);
+  overflow: hidden;
   border-radius: var(--radius-md);
   background: rgba(225, 226, 218, 0.58);
   box-shadow: 0 8px 26px rgba(37, 51, 44, 0.11);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(56vh, 37rem);
   object-fit: contain;
+}
+
+.protectionNotice {
+  position: absolute;
+  right: clamp(0.45rem, 1vw, 0.75rem);
+  bottom: clamp(0.45rem, 1vw, 0.75rem);
+  max-width: calc(100% - 0.9rem);
+  padding: 0.3rem 0.42rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 0.2rem;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(24, 31, 28, 0.62);
+  backdrop-filter: blur(5px);
+  font-size: clamp(0.43rem, 0.52vw, 0.54rem);
+  font-weight: 650;
+  letter-spacing: 0.045em;
+  line-height: 1.35;
+  pointer-events: none;
+  text-align: right;
 }
 
 .slide figcaption {

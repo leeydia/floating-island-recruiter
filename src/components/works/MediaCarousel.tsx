@@ -1,16 +1,21 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
+import { ProtectedImage } from "@/components/media/ProtectedImage";
 import type { WorksMedia } from "@/content/works";
 import styles from "./MediaCarousel.module.css";
 
 interface MediaCarouselProps {
   projectName: string;
   media: WorksMedia[];
+  protectionNotice?: string;
 }
 
-export function MediaCarousel({ projectName, media }: MediaCarouselProps) {
+export function MediaCarousel({
+  projectName,
+  media,
+  protectionNotice,
+}: MediaCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   if (media.length === 0) {
@@ -57,14 +62,21 @@ export function MediaCarousel({ projectName, media }: MediaCarouselProps) {
       <div ref={trackRef} className={styles.track} tabIndex={0}>
         {media.map((image, index) => (
           <figure key={image.src} className={styles.slide}>
-            <Image
-              className={styles.image}
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-              sizes="(max-width: 899px) 82vw, (max-width: 1199px) 48vw, 40vw"
-            />
+            <div className={styles.imageFrame}>
+              <ProtectedImage
+                className={styles.image}
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                sizes="(max-width: 899px) 82vw, (max-width: 1199px) 48vw, 40vw"
+              />
+              {protectionNotice ? (
+                <span className={styles.protectionNotice} aria-hidden="true">
+                  {protectionNotice}
+                </span>
+              ) : null}
+            </div>
             <figcaption>
               {String(index + 1).padStart(2, "0")} / {String(media.length).padStart(2, "0")}
             </figcaption>

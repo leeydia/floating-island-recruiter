@@ -139,7 +139,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     ],
     reflectionLabel: "Where I am heading",
     reflection:
-      "Toward AI-related product opportunities, with the long-term goal of becoming an AI Product Manager.",
+      "I’m still exploring where AI and product might take me. Rather than aiming for one fixed role, I want to keep learning, building, and discovering where my different experiences can come together.",
     relatedAction: {
       label: "Explore My AI Projects",
       landmark: "exploration",

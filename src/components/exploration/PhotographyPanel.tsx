@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useState, type CSSProperties } from "react";
+import { ProtectedImage } from "@/components/media/ProtectedImage";
 import {
   PHOTOGRAPHY_GROUPS,
   type ExplorationMedia,
@@ -104,7 +104,7 @@ function PhotographyLocation({ group }: { group: PhotographyGroup }) {
                 }
               >
                 <div className={styles.imageFrame}>
-                  <Image
+                  <ProtectedImage
                     src={image.src}
                     alt={image.alt}
                     width={image.width}

@@ -23,42 +23,98 @@ export const AI_PROJECT = {
   title: "Leeydia's Floating Island",
   metadata: [
     { label: "Project", value: "Leeydia's Floating Island" },
-    { label: "Type", value: "Personal Website / AI Exploration" },
-    { label: "Role", value: "Concept, Design & Development" },
+    { label: "Type", value: "Personal Website · AI-Assisted Product Experiment" },
+    { label: "Role", value: "Concept, Product, Design & AI-assisted Development" },
     { label: "Status", value: "Ongoing / Current Exploration" },
   ],
   introduction:
-    "A personal portfolio experiment combining AI-assisted creation, design, spatial storytelling, interaction, and portfolio presentation within one explorable island.",
-  processIntroduction:
-    "The project moves iteratively between product thinking, visual exploration, implementation, and testing.",
+    "A personal portfolio built as an interactive floating island rather than a conventional website. It became an experiment in how I could use AI not simply to generate an outcome, but as a tool to help me think, design, build and iterate on a digital product from idea to implementation.",
   process: [
-    "Concept development",
-    "Information architecture",
-    "Visual direction",
-    "AI-assisted asset exploration",
-    "Interaction planning",
-    "PRD development",
-    "Iterative implementation",
-    "Testing and refinement",
+    {
+      title: "Defining the Idea",
+      description:
+        "Started with a simple question: how could a portfolio feel more like exploring a place than browsing a website?",
+    },
+    {
+      title: "Planning the Experience",
+      description:
+        "Mapped the island, landmarks, content structure, user flow and interactions before development, gradually turning the idea into a detailed PRD.",
+    },
+    {
+      title: "Building the Visual World",
+      description:
+        "Used AI-assisted image generation and iteration to develop the island, atmosphere, landmarks and overall visual direction.",
+    },
+    {
+      title: "Designing the Interaction",
+      description:
+        "Worked through navigation, camera movement, nodes, panels, transitions and responsive behaviour to make the island understandable as an interface—not only an illustration.",
+    },
+    {
+      title: "Building with AI",
+      description:
+        "Used AI coding tools to translate the design and requirements into a working website, while learning how to structure prompts, review implementation decisions and communicate changes precisely.",
+    },
+    {
+      title: "Testing & Iterating",
+      description:
+        "Repeatedly tested the experience in-browser, refining details such as node placement, content hierarchy, image layouts, transitions, clouds and navigation based on what actually worked.",
+    },
+    {
+      title: "Managing the Build",
+      description:
+        "Introduced Git version control, organised content and media, and gradually moved from experimenting with individual features toward managing the website as a complete product.",
+    },
+    {
+      title: "Still Exploring",
+      description:
+        "The website itself remains part of the experiment. As I learn more about AI, product thinking and development, I continue to refine both the island and the way I work with these tools.",
+    },
   ],
+  whatILearned:
+    "This project changed how I see AI—from something that produces answers into something I can actively work with. I learned that getting a good outcome still depends heavily on defining the problem, making decisions, communicating clearly, testing what was built, and knowing when something doesn't feel right.",
   media: [
     {
-      src: "/media/AI/website-island001.webp",
-      alt: "Early visual development for Leeydia's Floating Island",
+      src: "/media/AI/AI001.webp",
+      alt: "Leeydia's Floating Island project image 1",
+      width: 1587,
+      height: 885,
+    },
+    {
+      src: "/media/AI/AI002.webp",
+      alt: "Leeydia's Floating Island project image 2",
+      width: 1586,
+      height: 886,
+    },
+    {
+      src: "/media/AI/AI003.webp",
+      alt: "Leeydia's Floating Island project image 3",
+      width: 1587,
+      height: 886,
+    },
+    {
+      src: "/media/AI/AI004.webp",
+      alt: "Leeydia's Floating Island project image 4",
+      width: 2000,
+      height: 2000,
+    },
+    {
+      src: "/media/AI/AI005.webp",
+      alt: "Leeydia's Floating Island project image 5",
       width: 1536,
       height: 1024,
     },
     {
-      src: "/media/AI/website-island002.webp",
-      alt: "Annotated interaction development for Leeydia's Floating Island",
+      src: "/media/AI/AI006.webp",
+      alt: "Leeydia's Floating Island project image 6",
       width: 1536,
       height: 1024,
     },
     {
-      src: "/media/AI/website-island003.webp",
-      alt: "Floating Island experience development visual",
-      width: 1672,
-      height: 941,
+      src: "/media/AI/AI007.webp",
+      alt: "Leeydia's Floating Island project image 7",
+      width: 1586,
+      height: 992,
     },
   ] satisfies ExplorationMedia[],
 } as const;

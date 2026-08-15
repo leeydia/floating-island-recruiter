@@ -13,6 +13,7 @@ export interface WorksDetailSection {
   heading: string;
   paragraphs?: string[];
   items?: string[];
+  variant?: "question";
 }
 
 export interface WorksProject {
@@ -20,7 +21,7 @@ export interface WorksProject {
   name: string;
   tags: string[];
   summary: string;
-  metadata?: string;
+  detailMetadata?: string[];
   location?: string;
   introduction?: string;
   credits?: Array<{
@@ -77,18 +78,13 @@ const visualizationMedia = (
   width: number,
   height: number,
 ): WorksMedia => ({
-  src: `/media/3D-visualization/${folder}/${file}.webp`,
+  src: `/media/3D-visualization/${encodeURIComponent(folder)}/${file}.webp`,
   alt,
   width,
   height,
 });
 
 const VISUALIZATION_STUDIO_CREDIT = "4D Studio";
-const VISUALIZATION_INTRODUCTION_PLACEHOLDER =
-  "[PROJECT INTRODUCTION — TO BE ADDED]";
-const BRANDING_PROJECT_CREDIT: WorksProject["credits"] = [
-  { label: "Role", value: "Brand Experience / Communication Executive" },
-];
 const VISUALIZATION_CLOSING =
   "Selected visualisations are presented as examples of my professional work. Project and development rights remain with the respective developers, clients, employers, and rights holders. Images are used for portfolio presentation only.";
 
@@ -105,7 +101,10 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         id: "fun-food-fair",
         name: "The Fun Food Fair",
         tags: ["Food Hub", "Chow Kit", "Design Studio 6"],
-        metadata: "August 2020",
+        detailMetadata: [
+          "Food Hub · Chow Kit, Kuala Lumpur",
+          "Design Studio 6 · August 2020",
+        ],
         summary:
           "An urban food hub conceived as a green, inclusive social space within the dense fabric of Chow Kit. Developed through site observation and user research, the proposal combines food, play, learning, and urban farming to create a place where local communities, transit users, and overlooked groups can meet.",
         media: [
@@ -115,10 +114,33 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         ],
         details: [
           {
-            heading: "Research Foundation — Ciao Kit",
+            heading: "Context",
             paragraphs: [
-              "The Ciao Kit site analysis informed the project by examining Chow Kit's users, movement patterns, community needs, and surrounding urban conditions. It is presented as the research phase of The Fun Food Fair, rather than as a separate project.",
+              "Chow Kit is dense, fast-moving and culturally diverse, but the research identified a lack of accessible green, recreational and community spaces—particularly for children and underserved communities. The project asked how a food hub could become more than a place to eat, and instead provide a shared social space within the city.",
             ],
+          },
+          {
+            heading: "Design Idea — Fun + Food + Fair",
+            paragraphs: [
+              "The proposal combines food with recreation, education, culture and urban farming. Rather than separating these functions, the building is designed as a multi-use environment where different groups and activities overlap—using food as the common element that brings people together.",
+            ],
+          },
+          {
+            heading: "Design Response",
+            items: [
+              "Four entrances respond to major pedestrian approaches and invite different user groups into the building.",
+              "A green belt helps filter traffic noise and air pollution.",
+              "Public and quieter programmes are positioned according to surrounding noise conditions.",
+              "The ground floor operates almost as an extension of the city, able to shift between park, market, exhibition, amphitheatre and event uses.",
+              "Rooftop and upper-level programmes introduce urban farming, edible gardens, play, learning and a public kitchen.",
+            ],
+          },
+          {
+            heading: "Underlying Question",
+            paragraphs: [
+              "How can architecture slow people down in a fast-moving part of the city and create opportunities for different communities to meet?",
+            ],
+            variant: "question",
           },
         ],
       },
@@ -126,7 +148,10 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         id: "floating-island",
         name: "The Floating Island",
         tags: ["Community Centre", "Kajang", "Design Studio 5"],
-        metadata: "March 2020",
+        detailMetadata: [
+          "Community Centre · Kajang Old Town",
+          "Design Studio 5 · March 2020",
+        ],
         summary:
           "A community centre designed around continuity—connecting streets, histories, generations, and nature within Kajang Old Town. Layered circulation, planted semi-outdoor spaces, and a protective façade create a calm gathering place within a busy urban setting.",
         media: [
@@ -136,10 +161,33 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         ],
         details: [
           {
-            heading: "Research Foundation — Town of Collaging",
+            heading: "Context",
             paragraphs: [
-              "The Town of Collaging study explored gaps in Kajang's spatial continuity, local identity, and connections between people and place. It is presented as the research phase of The Floating Island, rather than as a separate project.",
+              "Located within the busy streets of Kajang Old Town, the site is surrounded by traffic, commercial shophouses and very limited greenery. The project responds by creating a community centre that reconnects people, nature and the existing urban context.",
             ],
+          },
+          {
+            heading: "Design Idea — Continuity",
+            paragraphs: [
+              "“Continuity” became the central concept at two levels. Physical continuity extends streets, paths and visual connections through the building to increase opportunities for people to encounter one another. Cultural continuity uses history, memories and shared activities to connect different generations.",
+            ],
+          },
+          {
+            heading: "Design Response",
+            items: [
+              "Corridors and stairs are treated as internal “streets” connecting programmes and people.",
+              "Angled stairs strengthen visual connections while bringing daylight deeper into the building.",
+              "Programmes including a café, basketball court, mahjong space, reading and co-working areas, indoor playscape and learning spaces cater to different generations.",
+              "Pocket gardens, terraces and a rooftop garden weave greenery throughout the building.",
+              "Environmental strategies include rainwater collection, green roofs, skylights and a double façade that provides shading and reduces traffic noise.",
+            ],
+          },
+          {
+            heading: "Underlying Question",
+            paragraphs: [
+              "Can a community building create more opportunities for people of different generations to cross paths, interact and develop a stronger sense of belonging?",
+            ],
+            variant: "question",
           },
         ],
       },
@@ -147,13 +195,48 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         id: "garden",
         name: "The Garden",
         tags: ["Early Years Centre", "PJS 7, Sunway", "Design Studio 4"],
-        metadata: "November 2019",
+        detailMetadata: [
+          "Early Years Centre · PJS 7, Sunway",
+          "Design Studio 4 · November 2019",
+        ],
         summary:
           "An early-years centre shaped from a child's perspective, using simple triangular geometry, natural materials, and garden spaces to support play, discovery, and self-directed learning. The building acts as a flexible canvas for children to create their own experiences.",
         media: [
           architectureMedia("Garden001", "The Garden exterior render", 504, 307),
           architectureMedia("Garden002", "The Garden supporting project visual", 504, 284),
           architectureMedia("Garden003", "The Garden supporting project visual", 539, 303),
+        ],
+        details: [
+          {
+            heading: "Context",
+            paragraphs: [
+              "Conceived as a hidden garden within the concrete jungle, this project explores architecture from a child's perspective—where spaces are less prescribed and learning can happen through play, movement, discovery and interaction with the environment.",
+            ],
+          },
+          {
+            heading: "Design Idea — A Canvas for Children",
+            paragraphs: [
+              "Instead of treating the building as something complete, The Garden imagines it as a simple canvas that children bring to life themselves. Triangular geometry creates a clear architectural language while allowing spaces of different scales and characters to emerge throughout the centre.",
+            ],
+          },
+          {
+            heading: "Design Response",
+            items: [
+              "The programme combines classrooms with an outdoor courtyard, jungle-school activity area, outdoor learning spaces, gardens, indoor gym and multipurpose spaces.",
+              "Existing trees were considered during the development of the building mass.",
+              "Public and private areas, building height and scale informed how the mass was divided.",
+              "Smaller-scale volumes create different spatial characters rather than one institutional building.",
+              "A lightweight timber framing system reinforces the project's natural and child-oriented character.",
+              "Green space is maximised while strategies such as porous paving respond to sustainability and the landscape.",
+            ],
+          },
+          {
+            heading: "Underlying Question",
+            paragraphs: [
+              "What happens when an educational space is designed through the eyes of a child rather than entirely through the expectations of adults?",
+            ],
+            variant: "question",
+          },
         ],
       },
     ],
@@ -177,16 +260,13 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         tags: ["Brand Development", "Menu", "Photography", "Social Media"],
         summary:
           "Supported Tsutaya Books Café from its early development, contributing across the overall concept, menu, visual communication, food presentation, and ongoing brand touchpoints.",
-        credits: BRANDING_PROJECT_CREDIT,
         media: [
           brandingMedia("f&b", "Tsutayacafe001", "Tsutaya Books Café brand and menu work", 1206, 2099),
           brandingMedia("f&b", "Tsutayacafe002", "Tsutaya Books Café brand and menu work", 1206, 2115),
           brandingMedia("f&b", "Tsutayacafe003", "Tsutaya Books Café brand and menu work", 1206, 2132),
         ],
         details: [
-          { heading: "Context", paragraphs: ["Tsutaya Books Café was part of a newly introduced brand concept, and I was involved from the early stages of bringing the café experience to life locally."] },
-          { heading: "My Role", paragraphs: ["Supported the café across brand, menu, content, and launch-related work, including menu curation, market research, food tasting, food styling and photography assistance, menu selection and materials, printer liaison, social media, and overall concept development."] },
-          { heading: "What I Worked On", items: ["Market and audience research", "Overall café concept development", "Menu curation and selection", "Food tasting", "Food styling and photography assistance", "Menu graphics and material coordination", "Printer and supplier liaison", "Social media content and posting"] },
+          { heading: "What I Worked On", items: ["Market and audience research", "Overall café concept development", "Menu curation and selection", "Food styling and photography assistance", "Menu graphics and material coordination", "Printer and supplier liaison", "Social media content and posting"] },
           { heading: "Reflection", paragraphs: ["Being involved from the beginning taught me how many small decisions come together to shape a complete brand experience—from what appears on the menu to how the food is presented, photographed, printed, and communicated to customers."] },
         ],
       },
@@ -196,12 +276,14 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         tags: ["Rebranding", "PR", "Seasonal Menu", "Events"],
         summary:
           "Supported the restaurant's rebranding and formal reopening after its original launch during the pandemic, bringing together refreshed communication, seasonal menus, PR, and an opening event.",
-        credits: BRANDING_PROJECT_CREDIT,
-        media: [],
+        media: [
+          brandingMedia("f&b", "Jade001", "Jade Pavilion rebranding and reopening work", 1800, 1200),
+          brandingMedia("f&b", "Jade002", "Jade Pavilion rebranding and reopening work", 2048, 1365),
+          brandingMedia("f&b", "Jade003", "Jade Pavilion rebranding and reopening work", 6541, 4361),
+          brandingMedia("f&b", "Jade004", "Jade Pavilion rebranding and reopening work", 7008, 4672),
+        ],
         details: [
-          { heading: "Context", paragraphs: ["Jade Pavilion opened during the pandemic, which meant its original launch did not have the opportunity to fully establish the restaurant in the market. When our team took over the account, the focus was on refreshing the brand and creating a more formal reopening moment."] },
-          { heading: "My Role", paragraphs: ["Supported the rebranding and reopening campaign, including seasonal menu PR, menu graphic design, social media, media relations, food tasting, PR event planning, event-day coordination, and communication with media and partners."] },
-          { heading: "What I Worked On", items: ["Rebranding support", "Reopening / opening ceremony planning", "Seasonal menu PR", "Menu graphic design", "Social media content and posting", "Food tasting", "Media PR and coordination", "PR event planning", "Event-day coordination"] },
+          { heading: "What I Worked On", items: ["Rebranding support", "Reopening / opening ceremony planning", "Seasonal menu PR", "Social media content and posting", "Media PR and coordination", "Menu graphic design", "Food tasting", "PR event planning", "Event-day coordination"] },
           { heading: "Reflection", paragraphs: ["This project showed me how branding extends beyond visual identity. Reintroducing the restaurant required aligning the menu, communication, media relationships, and physical event experience so that the brand could be presented to the public as one cohesive story."] },
         ],
       },
@@ -211,7 +293,6 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         tags: ["Hospitality Group", "Social Media", "Seasonal Campaigns", "E-commerce"],
         summary:
           "Supported ongoing brand communication for a hospitality group comprising three restaurant brands and six outlets, spanning social media, seasonal menus, e-commerce, and food imagery.",
-        credits: BRANDING_PROJECT_CREDIT,
         media: [
           brandingMedia("f&b", "Huckleberry001", "Huckleberry Hospitality Group brand communication", 1206, 782),
           brandingMedia("f&b", "Huckleberry002", "Huckleberry Hospitality Group brand communication", 1206, 1398),
@@ -220,8 +301,6 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
           brandingMedia("f&b", "Huckleberry005", "Huckleberry Hospitality Group brand communication", 1465, 803),
         ],
         details: [
-          { heading: "Context", paragraphs: ["Huckleberry Hospitality Group operated three restaurant brands across six outlets, requiring ongoing communication across multiple locations and seasonal updates."] },
-          { heading: "My Role", paragraphs: ["Supported day-to-day brand communication across the group through social media, seasonal menu design, e-commerce website maintenance, and assistance with food photography."] },
           { heading: "What I Worked On", items: ["Social media content and posting", "Seasonal menu graphic design", "E-commerce website maintenance", "Food photography assistance", "Ongoing brand communication across multiple outlets"] },
           { heading: "Reflection", paragraphs: ["Working across several brands and outlets strengthened my ability to manage recurring content while keeping communication organised and relevant to each restaurant's needs."] },
         ],
@@ -232,15 +311,12 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         tags: ["Brand Identity", "Virtual Kitchen", "Food Styling", "Social Media"],
         summary:
           "Worked on the identity and communication of a Singapore-based virtual-kitchen concept designed to help restaurant kitchens make better use of otherwise unused operating hours.",
-        credits: BRANDING_PROJECT_CREDIT,
         media: [
           brandingMedia("f&b", "tiffin001", "TiffinLab brand identity and communication", 1206, 1181),
           brandingMedia("f&b", "tiffin002", "TiffinLab brand identity and communication", 1206, 1183),
           brandingMedia("f&b", "tiffin003", "TiffinLab brand identity and communication", 1206, 1185),
         ],
         details: [
-          { heading: "Context", paragraphs: ["TiffinLab was a Singapore-based virtual kitchen concept built around maximising underused restaurant kitchen capacity. Multiple food brands operated under the concept, partnering with restaurants whose kitchens were unused during certain parts of the day."] },
-          { heading: "My Role", paragraphs: ["Supported the development and communication of the concept through brand identity work, logo design, food styling, photography assistance, and social media content."] },
           { heading: "What I Worked On", items: ["Brand identity development", "Logo design", "Food styling", "Food photography assistance", "Social media content and posting"] },
           { heading: "Reflection", paragraphs: ["TiffinLab introduced me to a less conventional F&B business model. It pushed me to think beyond the visual identity and first understand how the service worked, who it served, and how a new concept could be communicated clearly to customers."] },
         ],
@@ -251,7 +327,6 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         tags: ["Startup", "Brand Identity", "E-commerce", "App", "Food Content"],
         summary:
           "Supported Freshable from its early stage as a meal-kit startup, contributing across brand identity, digital experience, research, food content, social media, and PR.",
-        credits: BRANDING_PROJECT_CREDIT,
         media: [
           brandingMedia("f&b", "Freshable001", "Freshable brand and customer experience work", 1206, 1028),
           brandingMedia("f&b", "Freshable002", "Freshable brand and customer experience work", 1206, 1193),
@@ -262,9 +337,7 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
           brandingMedia("f&b", "Freshable007", "Freshable brand and customer experience work", 1878, 838),
         ],
         details: [
-          { heading: "Context", paragraphs: ["Freshable was a meal-kit startup, and I was involved from its early stage as the brand and customer experience were being developed across both digital and physical touchpoints."] },
-          { heading: "My Role", paragraphs: ["Supported a broad range of work across brand development, digital products, content, and food experience, including market research, overall brand identity, e-commerce, app development support, food styling and photography, food tasting, social media, and media PR."] },
-          { heading: "What I Worked On", items: ["Market and audience research", "Overall brand identity", "E-commerce website development / maintenance support", "App development support", "Food tasting", "Food styling and photography", "Social media content and posting", "Media PR"] },
+          { heading: "What I Worked On", items: ["Market and audience research", "Overall brand identity", "E-commerce experience", "App development support", "Food styling and photography assistance", "Food tasting", "Social media content and posting", "Media PR"] },
           { heading: "Reflection", paragraphs: ["Freshable gave me early exposure to working on a startup where the brand, product, digital experience, and customer communication were evolving at the same time. It taught me to look at a business more holistically rather than treating branding as a standalone visual exercise."] },
         ],
       },
@@ -284,7 +357,6 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         tags: ["Market Launch", "Retail Experience", "PR", "Events", "Social Media"],
         summary:
           "Supported Tsutaya Books Malaysia from its entry into the Malaysian market as the first Tsutaya Books location in Southeast Asia, contributing across the physical retail experience, launch, communication, and ongoing brand activities.",
-        credits: BRANDING_PROJECT_CREDIT,
         media: [
           brandingMedia("retail&lifestyle", "Tsutaya001", "Tsutaya Books Malaysia market launch and retail experience", 4672, 7008),
           brandingMedia("retail&lifestyle", "Tsutaya002", "Tsutaya Books Malaysia market launch and retail experience", 7008, 4672),
@@ -294,10 +366,8 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
           brandingMedia("retail&lifestyle", "Tsutaya006", "Tsutaya Books Malaysia market launch and retail experience", 1206, 1195),
         ],
         details: [
-          { heading: "Context", paragraphs: ["Tsutaya Books Malaysia was introduced through a joint-venture collaboration with the Japanese bookstore brand, marking its first location in Southeast Asia. I was involved from the early stages of bringing the brand into the Malaysian market and continued supporting it beyond launch."] },
-          { heading: "My Role", paragraphs: ["Supported the project across interior and site coordination, wayfinding, launch planning, media and PR, social media, day-to-day brand operations, and seasonal events."] },
-          { heading: "What I Worked On", items: ["Interior site visits and coordination", "Wayfinding system development / coordination", "Grand launch planning and event coordination", "Curated media and KOL tours during the soft-launch period", "Media and PR coordination", "Social media content and posting", "Day-to-day brand operations and communication", "Seasonal event planning and coordination"] },
-          { heading: "Recognition / Milestones", items: ["First Tsutaya Books location in Southeast Asia", "Grand launch preceded by curated media and KOL tours during the soft launch", "Japanese Ambassador invited to the grand launch", "Winner of the Monocle Retail Awards 2023 — Best Asian Expansion"] },
+          { heading: "Recognition / Milestones", items: ["First Tsutaya Books location in Southeast Asia", "Winner of the Monocle Retail Awards 2023 — Best Asian Expansion"] },
+          { heading: "What I Worked On", items: ["Retail experience & customer journey", "Wayfinding & in-store communication", "Launch planning & coordination", "Day-to-day operational support", "Stakeholder meetings & coordination", "Bridging stakeholders and operational teams", "Media & PR coordination", "Social media content & communication", "Events & ongoing brand activities"] },
           { heading: "Reflection", paragraphs: ["Being involved from the early stages through launch and ongoing operations gave me a broader understanding of how an international brand is translated into a new market. The experience connected physical space, customer navigation, communication, media, events, and everyday operations as parts of one retail brand experience."] },
         ],
       },
@@ -307,13 +377,14 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
         tags: ["Fashion", "Store Launch", "Media & PR"],
         summary:
           "Supported the grand launch of Auri's fashion retail outlet, with a focus on launch coordination, media, and PR.",
-        credits: BRANDING_PROJECT_CREDIT,
-        media: [],
+        media: [
+          brandingMedia("retail&lifestyle", "Auri001", "Auri fashion retail launch work", 2500, 1406),
+          brandingMedia("retail&lifestyle", "Auri002", "Auri fashion retail launch work", 2500, 1669),
+          brandingMedia("retail&lifestyle", "Auri003", "Auri fashion retail launch work", 2500, 1669),
+          brandingMedia("retail&lifestyle", "Auri004", "Auri fashion retail launch work", 2500, 1669),
+        ],
         details: [
-          { heading: "Context", paragraphs: ["Auri is a fashion brand launching a retail outlet, requiring a coordinated opening moment supported by media and PR."] },
-          { heading: "My Role", paragraphs: ["Supported the outlet's grand launch and related media and PR activities."] },
-          { heading: "What I Worked On", items: ["Grand launch support and coordination", "Media coordination", "PR support"] },
-          { heading: "Reflection", paragraphs: ["The project gave me further experience in using a physical launch event and media engagement to introduce a retail brand and create a coordinated public-facing moment."] },
+          { heading: "What I Worked On", items: ["Grand opening coordination", "Media & PR", "Launch communication", "On-ground event support"] },
         ],
       },
     ],
@@ -327,11 +398,11 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
     metadata: ["3D Visualisation", "3D Artist"],
     workflow: "Google Earth → Camera Brief → Aerial / Drone / Helicopter Photography → Blender → 3ds Max → V-Ray → Photoshop",
     projects: [
-      visualizationProject("donnybrook-aerial", "Donnybrook Acclaim", "Yourland Developments", "Donnybrook VIC, Australia", [
+      visualizationProject("donnybrook-aerial", "Donnybrook Acclaim", "Yourland Developments", "Donnybrook VIC, Australia", "A large-scale township visualisation showcasing the development as a connected community, bringing together residential neighbourhoods, local parks, a sports centre, community facilities and schools within the wider masterplan.", [
         visualizationMedia("Township & Aerial", "donnybrook-acclaim_aerial", "Donnybrook Acclaim aerial render", 3000, 2250),
         visualizationMedia("Township & Aerial", "donnybrook-acclaim_topdown", "Donnybrook Acclaim top-down aerial render", 3000, 3000),
       ]),
-      visualizationProject("plumpton", "Plumpton", "Yourland Developments", "Plumpton VIC, Australia", [
+      visualizationProject("plumpton", "Plumpton", "Yourland Developments", "Plumpton VIC, Australia", "A township-scale visualisation illustrating how residential neighbourhoods sit alongside parks, schools, community facilities and recreational spaces, presenting the development as a complete and connected place to live.", [
         visualizationMedia("Township & Aerial", "Plumpton_aerial", "Plumpton aerial render", 2500, 1667),
         visualizationMedia("Township & Aerial", "Plumpton_topdown", "Plumpton top-down aerial render", 2500, 2500),
       ]),
@@ -347,11 +418,11 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
     metadata: ["3D Visualisation", "3D Artist"],
     workflow: "AutoCAD → 3ds Max → V-Ray → Photoshop",
     projects: [
-      visualizationProject("thyme-forster", "Thyme Forster", "Serenitas Management", "Forster NSW, Australia", [
+      visualizationProject("thyme-forster", "Thyme Forster", "Serenitas Management", "Forster NSW, Australia", "A close-up exterior visualisation focused on architectural, material and landscape detail. The surrounding context was created through photomontage using a photographer’s 360° panorama—bringing a workflow more commonly used in aerial imagery into a street-level perspective.", [
         visualizationMedia("Exterior", "thyme-forster_streetscape", "Thyme Forster streetscape render", 2500, 1250),
         visualizationMedia("Exterior", "thyme-forster_swimming-pool", "Thyme Forster swimming pool render", 2500, 1250),
       ]),
-      visualizationProject("donnybrook-exterior", "Donnybrook Acclaim", "Yourland Developments", "Donnybrook VIC, Australia", [
+      visualizationProject("donnybrook-exterior", "Donnybrook Acclaim", "Yourland Developments", "Donnybrook VIC, Australia", "A close-up visualisation of the town centre and sports centre public spaces, with particular focus on landscape and community space planning. The project allowed greater creative freedom in shaping the layouts, making it an opportunity to explore how these shared spaces could feel active, welcoming and lived-in.", [
         visualizationMedia("Exterior", "donnybrook-acclaim_towncentre", "Donnybrook Acclaim town centre render", 2500, 1250),
         visualizationMedia("Exterior", "donnybrook-acclaim_sportcentre", "Donnybrook Acclaim sport centre render", 2500, 1500),
       ]),
@@ -367,13 +438,13 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
     metadata: ["3D Visualisation", "3D Artist"],
     workflow: "AutoCAD → 3ds Max → V-Ray → Photoshop",
     projects: [
-      visualizationProject("maple-grove", "Maple Grove", "Satterley Property Group", "Katoomba NSW, Australia", [
+      visualizationProject("maple-grove", "Maple Grove", "Satterley Property Group", "Katoomba NSW, Australia", "A landscape-focused visualisation requiring close attention to planting composition and species accuracy. Working from the landscape designer’s documentation, planting was carefully placed and balanced using Forest Pack to stay true to the design while creating a natural and visually cohesive landscape.", [
         visualizationMedia("Landscape", "maplegrove-park_000", "Maple Grove park render", 2500, 1876),
         visualizationMedia("Landscape", "maplegrove-park_001", "Maple Grove park render", 2500, 1407),
         visualizationMedia("Landscape", "maplegrove-park_002", "Maple Grove park render", 2500, 1499),
         visualizationMedia("Landscape", "maplegrove-park_003", "Maple Grove park render", 2500, 1499),
       ]),
-      visualizationProject("donnybrook-landscape", "Donnybrook Acclaim", "Yourland Developments", "Donnybrook VIC, Australia", [
+      visualizationProject("donnybrook-landscape", "Donnybrook Acclaim", "Yourland Developments", "Donnybrook VIC, Australia", "A detailed landscape visualisation developed closely from the landscape designer’s planting documentation. Using Forest Pack, plant species and placement were carefully coordinated to reflect the specified landscape design while refining density, variation and composition for a convincing final image", [
         visualizationMedia("Landscape", "donnybrook-acclaim_park000", "Donnybrook Acclaim park render", 2500, 1250),
         visualizationMedia("Landscape", "donnybrook-acclaim_park001", "Donnybrook Acclaim park render", 2500, 2083),
         visualizationMedia("Landscape", "donnybrook-acclaim_creek", "Donnybrook Acclaim creek render", 2500, 1406),
@@ -388,6 +459,7 @@ function visualizationProject(
   name: string,
   client: string,
   location: string,
+  introduction: string,
   media: WorksMedia[],
 ): WorksProject {
   return {
@@ -396,18 +468,8 @@ function visualizationProject(
     tags: [location],
     summary: `${name} · ${location}`,
     location,
-    introduction: VISUALIZATION_INTRODUCTION_PLACEHOLDER,
+    introduction,
     media,
-    details: [
-      {
-        heading: "Project Credit",
-        paragraphs: [
-          `Developer / Client: ${client}`,
-          `Visualisation Studio / Employer: ${VISUALIZATION_STUDIO_CREDIT}`,
-          "My Role: 3D Artist",
-        ],
-      },
-    ],
     credits: [
       { label: "Role", value: "3D Artist" },
       { label: "Studio / Employer", value: VISUALIZATION_STUDIO_CREDIT },
