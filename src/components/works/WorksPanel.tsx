@@ -4,6 +4,7 @@ import type {
   WorksPanelContent,
   WorksProject,
 } from "@/content/works";
+import { ProjectDisclosure } from "@/components/content/ProjectDisclosure";
 import { MediaCarousel } from "./MediaCarousel";
 import styles from "./WorksPanel.module.css";
 
@@ -42,17 +43,19 @@ function DetailSections({
   );
 }
 
-function ArchitectureDetails({ project }: { project: WorksProject }) {
+function ProjectDetails({
+  project,
+  showMetadata,
+}: {
+  project: WorksProject;
+  showMetadata: boolean;
+}) {
   if (!project.details?.length) return null;
 
   return (
-    <details className={styles.architectureDetails}>
-      <summary>
-        <span>View Details</span>
-        <span className={styles.disclosureMark} aria-hidden="true">+</span>
-      </summary>
-      <div className={styles.architectureDetailsBody}>
-        {project.detailMetadata?.length ? (
+    <ProjectDisclosure>
+      <div className={styles.projectDetailsBody}>
+        {showMetadata && project.detailMetadata?.length ? (
           <ul className={styles.projectMetadata} aria-label={`${project.name} details`}>
             {project.detailMetadata.map((item) => (
               <li key={item}>{item}</li>
@@ -61,7 +64,7 @@ function ArchitectureDetails({ project }: { project: WorksProject }) {
         ) : null}
         <DetailSections details={project.details} />
       </div>
-    </details>
+    </ProjectDisclosure>
   );
 }
 
@@ -98,6 +101,13 @@ function Project({
         </section>
       ) : null}
 
+      {category === "architecture" || category === "branding" ? (
+        <ProjectDetails
+          project={project}
+          showMetadata={category === "architecture"}
+        />
+      ) : null}
+
       <MediaCarousel
         projectName={project.name}
         media={project.media}
@@ -108,15 +118,6 @@ function Project({
         }
       />
 
-      {category === "architecture" ? (
-        <ArchitectureDetails project={project} />
-      ) : null}
-
-      {category === "branding" && project.details?.length ? (
-        <div className={styles.brandingDetails}>
-          <DetailSections details={project.details} />
-        </div>
-      ) : null}
     </article>
   );
 }

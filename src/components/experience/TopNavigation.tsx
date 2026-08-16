@@ -127,27 +127,29 @@ export function TopNavigation({
       className={styles.navigation}
       aria-label="Island destinations"
     >
-      <span className={styles.contextLabel}>Current destination</span>
-      <button
-        ref={triggerRef}
-        type="button"
-        className={styles.trigger}
-        aria-haspopup="menu"
-        aria-expanded={isOpen}
-        aria-controls="island-destination-menu"
-        onClick={() => (isOpen ? closeMenu() : openMenu())}
-        onKeyDown={handleTriggerKeyDown}
-      >
-        <span className={styles.number}>{current.number}</span>
-        <span className={styles.currentText}>
-          <strong className={styles.destination}>{current.label}</strong>
-          <span className={styles.landmark}>{current.landmark}</span>
-        </span>
-        <span
-          className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
-          aria-hidden="true"
-        />
-      </button>
+      <div className={styles.currentDestination}>
+        <span className={styles.contextLabel}>Current destination</span>
+        <button
+          ref={triggerRef}
+          type="button"
+          className={styles.trigger}
+          aria-haspopup="menu"
+          aria-expanded={isOpen}
+          aria-controls="island-destination-menu"
+          onClick={() => (isOpen ? closeMenu() : openMenu())}
+          onKeyDown={handleTriggerKeyDown}
+        >
+          <span className={styles.number}>{current.number}</span>
+          <span className={styles.currentText}>
+            <strong className={styles.destination}>{current.label}</strong>
+            <span className={styles.landmark}>{current.landmark}</span>
+          </span>
+          <span
+            className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
+            aria-hidden="true"
+          />
+        </button>
+      </div>
 
       {isOpen ? (
         <ul

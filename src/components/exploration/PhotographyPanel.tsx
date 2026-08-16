@@ -30,14 +30,17 @@ function getOrientation(image: ExplorationMedia): PhotographOrientation {
 
 function composePhotographyRows(
   media: ExplorationMedia[],
+  pairFinalMedia = false,
 ): ComposedPhotograph[][] {
+  const finalPairStart = pairFinalMedia ? Math.max(0, media.length - 2) : media.length;
+  const mediaToCompose = media.slice(0, finalPairStart);
   const buckets: Record<PhotographOrientation, ComposedPhotograph[]> = {
     landscape: [],
     portrait: [],
     square: [],
   };
 
-  media.forEach((image, index) => {
+  mediaToCompose.forEach((image, index) => {
     const orientation = getOrientation(image);
     buckets[orientation].push({ image, index, orientation });
   });
@@ -56,13 +59,23 @@ function composePhotographyRows(
     }
   }
 
+  if (pairFinalMedia && media.length >= 2) {
+    rows.push(
+      media.slice(finalPairStart).map((image, pairIndex) => ({
+        image,
+        index: finalPairStart + pairIndex,
+        orientation: getOrientation(image),
+      })),
+    );
+  }
+
   return rows.sort((left, right) => left[0].index - right[0].index);
 }
 
 function PhotographyLocation({ group }: { group: PhotographyGroup }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const galleryId = `photography-${group.id}-gallery`;
-  const rows = composePhotographyRows(group.media);
+  const rows = composePhotographyRows(group.media, group.pairFinalMedia);
   const visibleRows = isExpanded
     ? rows
     : rows.slice(0, INITIAL_PHOTOGRAPHY_ROWS);

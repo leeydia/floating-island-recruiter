@@ -127,60 +127,8 @@
   color: var(--color-text-secondary);
 }
 
-.architectureDetails,
-.brandingDetails {
-  max-width: 41rem;
-  margin-top: 1.5rem;
-}
-
-.architectureDetails {
-  border-top: 1px solid rgba(61, 92, 74, 0.14);
-  border-bottom: 1px solid rgba(61, 92, 74, 0.14);
-}
-
-.architectureDetails summary {
-  display: flex;
-  min-height: 3rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  color: var(--color-forest-green);
-  font-size: 0.62rem;
-  font-weight: 750;
-  letter-spacing: 0.1em;
-  list-style: none;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.architectureDetails summary::-webkit-details-marker {
-  display: none;
-}
-
-.architectureDetails summary:focus-visible {
-  outline: 2px solid var(--color-sky-blue);
-  outline-offset: 3px;
-}
-
-.disclosureMark {
-  display: grid;
-  width: 1.65rem;
-  height: 1.65rem;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid rgba(61, 92, 74, 0.22);
-  border-radius: 50%;
-  font-size: 0.9rem;
-  font-weight: 450;
-  line-height: 1;
-}
-
-.architectureDetails[open] .disclosureMark {
-  transform: rotate(45deg);
-}
-
-.architectureDetailsBody {
-  padding: 0.35rem 0 1.5rem;
+.projectDetailsBody {
+  padding-bottom: 0.25rem;
 }
 
 .projectMetadata {
@@ -195,11 +143,6 @@
   font-weight: 650;
   letter-spacing: 0.045em;
   color: var(--color-text-secondary);
-}
-
-.brandingDetails {
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(61, 92, 74, 0.14);
 }
 
 .detailSections {
@@ -281,11 +224,5 @@
   .credits dl div {
     grid-template-columns: 1fr;
     gap: 0.05rem;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .disclosureMark {
-    transition: transform var(--duration-fast) var(--ease-calm);
   }
 }

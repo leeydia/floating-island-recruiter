@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ISLAND_WEBP } from "@/config/assets";
+import { ISLAND_ARTWORK } from "@/config/assets";
 import styles from "./IslandArtwork.module.css";
 
 interface IslandArtworkProps {
@@ -11,7 +11,7 @@ export function IslandArtwork({ onReady, onError }: IslandArtworkProps) {
   return (
     <div className={styles.artwork}>
       <Image
-        src={ISLAND_WEBP}
+        src={ISLAND_ARTWORK}
         alt="Illustrated floating island with a maze garden, outdoor theatre, harbor, natural lake, pavilion, and lighthouse."
         width={3840}
         height={2160}

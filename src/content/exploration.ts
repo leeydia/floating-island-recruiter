@@ -11,6 +11,7 @@ export interface PhotographyGroup {
   introduction: string;
   themes: string[];
   media: ExplorationMedia[];
+  pairFinalMedia?: boolean;
 }
 
 export const EXPLORATION_LANDMARK_INTRODUCTION =
@@ -151,7 +152,6 @@ export const PHOTOGRAPHY_GROUPS: PhotographyGroup[] = [
       photographyMedia("China", "China 006", "China", 3072, 4608),
       photographyMedia("China", "China 007", "China", 3072, 4608),
       photographyMedia("China", "China 008", "China", 3072, 4608),
-      photographyMedia("China", "China 009", "China", 3072, 4608),
     ],
   },
   {
@@ -160,6 +160,7 @@ export const PHOTOGRAPHY_GROUPS: PhotographyGroup[] = [
     introduction:
       "Indonesia offered a different rhythm—one shaped by nature, traditional craftsmanship, and the relationship between people and their surroundings.",
     themes: ["Nature", "Local Culture", "Lifestyle", "Environment"],
+    pairFinalMedia: true,
     media: [
       photographyMedia("Indonesia", "Indo001", "Indonesia", 4608, 3456),
       photographyMedia("Indonesia", "Indo002", "Indonesia", 3456, 4608),
@@ -190,7 +191,6 @@ export const PHOTOGRAPHY_GROUPS: PhotographyGroup[] = [
       photographyMedia("Newzealand", "NZ008", "New Zealand", 3072, 4608),
       photographyMedia("Newzealand", "NZ009", "New Zealand", 3072, 4608),
       photographyMedia("Newzealand", "NZ010", "New Zealand", 3072, 4608),
-      photographyMedia("Newzealand", "NZ011", "New Zealand", 4608, 3072),
     ],
   },
   {
@@ -210,7 +210,6 @@ export const PHOTOGRAPHY_GROUPS: PhotographyGroup[] = [
       photographyMedia("Europe", "Europe008", "Europe", 3456, 4608),
       photographyMedia("Europe", "Europe009", "Europe", 3456, 4608),
       photographyMedia("Europe", "Europe010", "Europe", 3456, 4608),
-      photographyMedia("Europe", "Europe011", "Europe", 3456, 4608),
     ],
   },
 ];

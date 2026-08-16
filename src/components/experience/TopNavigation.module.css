@@ -7,33 +7,37 @@
   animation: navigationIn var(--duration-medium) var(--ease-calm) 500ms both;
 }
 
+.currentDestination {
+  padding: 0.58rem 0.65rem 0.65rem;
+  border: 1px solid rgba(61, 92, 74, 0.14);
+  border-radius: var(--radius-md);
+  background: rgba(255, 252, 247, 0.9);
+  box-shadow: 0 8px 28px rgba(44, 62, 53, 0.1);
+  backdrop-filter: blur(11px);
+}
+
 .contextLabel {
   display: block;
-  margin: 0 0 0.4rem 0.8rem;
+  margin: 0 0 0.34rem 0.18rem;
   font-size: 0.57rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   color: var(--color-text-secondary);
-  text-shadow:
-    0 1px 5px rgba(255, 255, 255, 0.95),
-    0 0 12px rgba(255, 255, 255, 0.82);
   text-transform: uppercase;
 }
 
 .trigger {
   display: grid;
   width: 100%;
-  min-height: 3.7rem;
+  min-height: 3.25rem;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.72rem;
-  padding: 0.62rem 0.85rem;
+  padding: 0.48rem 0.3rem;
   appearance: none;
-  border: 1px solid rgba(61, 92, 74, 0.13);
-  border-radius: var(--radius-md);
-  background: rgba(255, 252, 247, 0.88);
-  box-shadow: 0 5px 20px rgba(44, 62, 53, 0.075);
-  backdrop-filter: blur(11px);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
   cursor: pointer;
   text-align: left;
   transition:
@@ -45,11 +49,7 @@
 .trigger:hover,
 .trigger:focus-visible,
 .trigger[aria-expanded="true"] {
-  border-color: rgba(90, 158, 196, 0.38);
-  background: rgba(255, 252, 247, 0.95);
-  box-shadow:
-    0 0 0 1px rgba(126, 184, 212, 0.14),
-    0 7px 24px rgba(44, 62, 53, 0.09);
+  background: rgba(126, 184, 212, 0.1);
 }
 
 .trigger:focus-visible,

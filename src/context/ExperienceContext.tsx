@@ -28,8 +28,6 @@ interface ExperienceContextValue {
   isEntering: boolean;
   selectNavigator: (landmark: LandmarkId) => void;
   returnToIslandOverview: () => void;
-  openMiniMap: () => void;
-  closeMiniMap: () => void;
   openContentPanel: (contentItem: ContentItemId) => void;
   closeContentPanel: () => void;
   closeContentPanelToIslandOverview: () => void;
@@ -70,23 +68,6 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
     setSceneTransform(ISLAND_OVERVIEW_TRANSFORM);
     setExperienceState("island-overview");
   }, []);
-
-  const openMiniMap = useCallback(() => {
-    setOpenContentItem(null);
-    setSceneTransform(ISLAND_OVERVIEW_TRANSFORM);
-    setExperienceState("minimap-overview");
-  }, []);
-
-  const closeMiniMap = useCallback(() => {
-    if (selectedLandmark) {
-      setSceneTransform(LANDMARK_TRANSFORMS[selectedLandmark]);
-      setExperienceState("landmark-view");
-      return;
-    }
-
-    setSceneTransform(ISLAND_OVERVIEW_TRANSFORM);
-    setExperienceState("island-overview");
-  }, [selectedLandmark]);
 
   const openContentPanel = useCallback((contentItem: ContentItemId) => {
     setOpenContentItem(contentItem);
@@ -139,8 +120,6 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
       isEntering,
       selectNavigator,
       returnToIslandOverview,
-      openMiniMap,
-      closeMiniMap,
       openContentPanel,
       closeContentPanel,
       closeContentPanelToIslandOverview,
@@ -157,8 +136,6 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
       isEntering,
       selectNavigator,
       returnToIslandOverview,
-      openMiniMap,
-      closeMiniMap,
       openContentPanel,
       closeContentPanel,
       closeContentPanelToIslandOverview,

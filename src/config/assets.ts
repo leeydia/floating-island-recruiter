@@ -1,4 +1,4 @@
-export const ISLAND_WEBP = "/assets/island/island-transparent.webp";
+export const ISLAND_ARTWORK = "/assets/island/island-transparent01.webp";
 
 /** Essential assets required before Enter becomes available. */
-export const ESSENTIAL_ASSETS = [ISLAND_WEBP] as const;
+export const ESSENTIAL_ASSETS = [ISLAND_ARTWORK] as const;

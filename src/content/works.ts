@@ -366,8 +366,8 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
           brandingMedia("retail&lifestyle", "Tsutaya006", "Tsutaya Books Malaysia market launch and retail experience", 1206, 1195),
         ],
         details: [
-          { heading: "Recognition / Milestones", items: ["First Tsutaya Books location in Southeast Asia", "Winner of the Monocle Retail Awards 2023 — Best Asian Expansion"] },
           { heading: "What I Worked On", items: ["Retail experience & customer journey", "Wayfinding & in-store communication", "Launch planning & coordination", "Day-to-day operational support", "Stakeholder meetings & coordination", "Bridging stakeholders and operational teams", "Media & PR coordination", "Social media content & communication", "Events & ongoing brand activities"] },
+          { heading: "Recognition / Milestones", items: ["First Tsutaya Books location in Southeast Asia", "Winner of the Monocle Retail Awards 2023 — Best Asian Expansion"] },
           { heading: "Reflection", paragraphs: ["Being involved from the early stages through launch and ongoing operations gave me a broader understanding of how an international brand is translated into a new market. The experience connected physical space, customer navigation, communication, media, events, and everyday operations as parts of one retail brand experience."] },
         ],
       },

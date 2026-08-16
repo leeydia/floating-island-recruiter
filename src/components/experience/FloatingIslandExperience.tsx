@@ -46,7 +46,7 @@ import { ExplorationNodes } from "./ExplorationNodes";
 import { InteractiveDotField } from "./InteractiveDotField";
 import { IslandArtwork } from "./IslandArtwork";
 import { LandmarkNavigator } from "./LandmarkNavigator";
-import { MiniMap, MiniMapClose } from "./MiniMap";
+import { MiniMap } from "./MiniMap";
 import { PavilionLabel } from "./PavilionLabel";
 import { TopNavigation } from "./TopNavigation";
 import { WelcomeScreen } from "./WelcomeScreen";
@@ -89,8 +89,7 @@ export function FloatingIslandExperience() {
     sceneTransform,
     isEntering,
     selectNavigator,
-    openMiniMap,
-    closeMiniMap,
+    returnToIslandOverview,
     openContentPanel,
     closeContentPanel,
     closeContentPanelToIslandOverview,
@@ -101,7 +100,6 @@ export function FloatingIslandExperience() {
   const isWelcome = experienceState === "welcome";
   const isIslandOverview = experienceState === "island-overview";
   const isLandmarkView = experienceState === "landmark-view";
-  const isMiniMapOverview = experienceState === "minimap-overview";
   const isContentPanel = experienceState === "content-panel";
   const hasFocusedLandmark =
     (isLandmarkView || isContentPanel) && selectedLandmark !== null;
@@ -110,8 +108,7 @@ export function FloatingIslandExperience() {
     hasFocusedLandmark && selectedLandmark === "exploration";
   const isAboutScene = hasFocusedLandmark && selectedLandmark === "about";
   const isContactScene = hasFocusedLandmark && selectedLandmark === "contact";
-  const showNavigators =
-    isIslandOverview || isMiniMapOverview || isEntering;
+  const showNavigators = isIslandOverview || isEntering;
   const sceneReady = assetsReady && islandReady;
   const sceneVisible = sceneReady || !isWelcome || isEntering;
   const loadError = preloadError ?? islandError;
@@ -209,17 +206,6 @@ export function FloatingIslandExperience() {
   }, [reducedMotion]);
 
   useEffect(() => {
-    if (!isMiniMapOverview) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeMiniMap();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [closeMiniMap, isMiniMapOverview]);
-
-  useEffect(() => {
     if (!isContentPanel) return;
     parallaxTargetRef.current = parallaxCurrentRef.current;
   }, [isContentPanel]);
@@ -240,11 +226,6 @@ export function FloatingIslandExperience() {
 
     if (!directDestination) {
       lastAutomaticDestinationRef.current = selectedLandmark;
-      return;
-    }
-
-    if (isMiniMapOverview) {
-      lastAutomaticDestinationRef.current = null;
       return;
     }
 
@@ -272,7 +253,6 @@ export function FloatingIslandExperience() {
     return () => window.clearTimeout(timerId);
   }, [
     isLandmarkView,
-    isMiniMapOverview,
     openContentPanel,
     reducedMotion,
     selectedLandmark,
@@ -353,6 +333,11 @@ export function FloatingIslandExperience() {
     },
     [selectNavigator],
   );
+
+  const handleMiniMapReturn = useCallback(() => {
+    overviewFocusTargetRef.current = selectedLandmark;
+    returnToIslandOverview();
+  }, [returnToIslandOverview, selectedLandmark]);
 
   const handleOpenWorksContent = useCallback(
     (contentItem: WorksContentItemId) => {
@@ -491,7 +476,7 @@ export function FloatingIslandExperience() {
             />
             <MiniMap
               selectedLandmark={selectedLandmark}
-              onOpen={openMiniMap}
+              onReturnToOverview={handleMiniMapReturn}
             />
           </>
         ) : null}
@@ -500,13 +485,6 @@ export function FloatingIslandExperience() {
         {isExplorationScene ? <ExplorationIntroduction /> : null}
         {isAboutScene ? <AboutIntroduction /> : null}
         {isContactScene ? <ContactIntroduction /> : null}
-
-        {isMiniMapOverview && selectedLandmark ? (
-          <MiniMapClose
-            selectedLandmark={selectedLandmark}
-            onClose={closeMiniMap}
-          />
-        ) : null}
 
         {!isWelcome ? (
           <header className={styles.globalUi}>

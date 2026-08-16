@@ -1,0 +1,55 @@
+.disclosure {
+  max-width: 41rem;
+  margin-top: 1rem;
+}
+
+.disclosure summary {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.15rem;
+  border-bottom: 1px solid rgba(61, 92, 74, 0.3);
+  color: var(--color-forest-green);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  list-style: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.disclosure summary:hover {
+  border-bottom-color: var(--color-lake-blue);
+  color: var(--color-lake-blue);
+}
+
+.disclosure summary:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid var(--color-sky-blue);
+  outline-offset: 3px;
+}
+
+.collapsedMark,
+.expandedMark {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.expandedMark,
+.disclosure[open] .collapsedMark {
+  display: none;
+}
+
+.disclosure[open] .expandedMark {
+  display: inline;
+}
+
+.body {
+  padding: 1.25rem 0 0.25rem;
+}

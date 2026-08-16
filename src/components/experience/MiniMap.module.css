@@ -32,8 +32,7 @@
   transform: translateY(-2px);
 }
 
-.miniMap:focus-visible,
-.closeOverview:focus-visible {
+.miniMap:focus-visible {
   outline: 2px solid var(--color-sky-blue);
   outline-offset: 4px;
 }
@@ -72,47 +71,6 @@
     0 0 0 3px rgba(90, 158, 196, 0.3),
     0 1px 5px rgba(44, 62, 53, 0.38);
   transform: translate(-50%, -50%);
-}
-
-.closeOverview {
-  position: absolute;
-  top: clamp(1.5rem, 3vw, 2.75rem);
-  left: clamp(1.5rem, 3vw, 3rem);
-  z-index: 10;
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.55rem 0.85rem;
-  appearance: none;
-  border: 1px solid var(--color-ui-border);
-  border-radius: var(--radius-md);
-  background: var(--color-ui-surface);
-  box-shadow: 0 6px 24px rgba(44, 62, 53, 0.1);
-  backdrop-filter: blur(10px);
-  cursor: pointer;
-  font-size: 0.67rem;
-  font-weight: 650;
-  letter-spacing: 0.075em;
-  color: var(--color-text-primary);
-  text-transform: uppercase;
-  transition:
-    background-color var(--duration-fast) var(--ease-calm),
-    box-shadow var(--duration-fast) var(--ease-calm);
-}
-
-.closeOverview:hover {
-  background: var(--color-ui-surface-strong);
-  box-shadow:
-    0 0 0 1px var(--color-navigator-glow),
-    0 8px 28px rgba(44, 62, 53, 0.12);
-}
-
-.closeIcon {
-  font-family: var(--font-sans);
-  font-size: 1.3rem;
-  font-weight: 300;
-  line-height: 1;
 }
 
 @keyframes miniMapIn {

@@ -2,7 +2,6 @@ export type ExperienceState =
   | "welcome"
   | "island-overview"
   | "landmark-view"
-  | "minimap-overview"
   | "content-panel";
 
 export type LandmarkId =
