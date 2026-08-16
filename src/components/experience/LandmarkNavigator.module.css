@@ -73,6 +73,8 @@
 }
 
 .labelTarget {
+  top: var(--navigator-label-y);
+  left: var(--navigator-label-x);
   padding: 1.25rem 1.5rem;
   border-radius: var(--radius-md);
   transition: transform var(--duration-fast) var(--ease-calm);
@@ -180,6 +182,14 @@
     width: 3rem;
     height: 3rem;
   }
+}
+
+@media (max-width: 600px) {
+  .labelTarget {
+    top: var(--navigator-mobile-label-y);
+    left: var(--navigator-mobile-label-x);
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

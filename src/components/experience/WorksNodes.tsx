@@ -42,6 +42,8 @@ export function WorksNodes({
           category={node.categoryLabel}
           label={node.label}
           position={node.position}
+          mobilePosition={node.mobilePosition}
+          mobileLabelOffset={node.mobileLabelOffset}
           sceneScale={sceneScale}
           visited={visitedItems.has(node.id)}
           accent={CATEGORY_COLORS[node.category].accent}

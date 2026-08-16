@@ -40,6 +40,7 @@ export function AboutNodes({
           category="About"
           label={node.label}
           position={node.position}
+          mobileLabelOffset={node.mobileLabelOffset}
           sceneScale={sceneScale}
           visited={visitedItems.has(node.id)}
           onSelect={() => onSelect(node.id)}

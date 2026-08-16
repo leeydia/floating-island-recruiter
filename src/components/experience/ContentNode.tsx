@@ -1,11 +1,13 @@
 import type { CSSProperties, ReactNode } from "react";
-import type { Position } from "@/types/experience";
+import type { MobileLabelOffset, Position } from "@/types/experience";
 import styles from "./ContentNode.module.css";
 
 interface ContentNodeProps {
   category: string;
   label: string;
   position: Position;
+  mobilePosition?: Position;
+  mobileLabelOffset?: MobileLabelOffset;
   sceneScale?: number;
   visited?: boolean;
   accent?: string;
@@ -19,6 +21,8 @@ export function ContentNode({
   category,
   label,
   position,
+  mobilePosition,
+  mobileLabelOffset,
   sceneScale = 1,
   visited = false,
   accent,
@@ -36,6 +40,14 @@ export function ContentNode({
           "--node-x": `${position.x}%`,
           "--node-y": `${position.y}%`,
           "--node-scale": 1 / sceneScale,
+          ...(mobilePosition
+            ? {
+                "--node-mobile-x": `${mobilePosition.x}%`,
+                "--node-mobile-y": `${mobilePosition.y}%`,
+              }
+            : {}),
+          "--content-node-mobile-label-x": `${mobileLabelOffset?.x ?? 0}px`,
+          "--content-node-mobile-label-y": `${mobileLabelOffset?.y ?? 0}px`,
           ...(accent
             ? {
                 "--content-node-icon": accent,

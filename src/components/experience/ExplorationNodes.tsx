@@ -47,6 +47,8 @@ export function ExplorationNodes({
           category="Exploration"
           label={node.label}
           position={node.position}
+          mobilePosition={node.mobilePosition}
+          mobileLabelOffset={node.mobileLabelOffset}
           sceneScale={sceneScale}
           visited={visitedItems.has(node.id)}
           accent={node.accent}

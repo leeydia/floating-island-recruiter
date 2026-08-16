@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { NavigatorConfig } from "@/types/experience";
 import styles from "./LandmarkNavigator.module.css";
 
@@ -16,11 +17,26 @@ export function LandmarkNavigator({
   isInteractive = true,
   onSelect,
 }: LandmarkNavigatorProps) {
-  const { number, label, landmark, anchor, labelPosition } = config;
+  const {
+    number,
+    label,
+    landmark,
+    anchor,
+    labelPosition,
+    mobileLabelPosition = labelPosition,
+  } = config;
 
   return (
     <div
       className={`${styles.wrapper} ${isVisible ? styles.wrapperVisible : ""}`}
+      style={
+        {
+          "--navigator-label-x": `${labelPosition.x}%`,
+          "--navigator-label-y": `${labelPosition.y}%`,
+          "--navigator-mobile-label-x": `${mobileLabelPosition.x}%`,
+          "--navigator-mobile-label-y": `${mobileLabelPosition.y}%`,
+        } as CSSProperties
+      }
     >
       <svg
         className={styles.leaderSvg}
@@ -47,10 +63,6 @@ export function LandmarkNavigator({
       >
         <span
           className={styles.labelTarget}
-          style={{
-            left: `${labelPosition.x}%`,
-            top: `${labelPosition.y}%`,
-          }}
         >
           <span className={styles.labelSurface}>
             <span className={styles.number}>{number}</span>

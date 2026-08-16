@@ -418,7 +418,11 @@ export function FloatingIslandExperience() {
         </div>
 
         <div className={styles.islandStage}>
-          <div className={styles.sceneCamera} style={cameraStyle}>
+          <div
+            className={styles.sceneCamera}
+            style={cameraStyle}
+            data-landmark={hasFocusedLandmark ? selectedLandmark : undefined}
+          >
             <div
               className={`${styles.islandFrame} ${islandReady ? styles.islandReady : ""}`}
             >

@@ -73,11 +73,11 @@
   width: min(85vw, 1400px, 140vh);
   aspect-ratio: 16 / 9;
   transform: translate3d(
-      var(--scene-translate-x),
-      var(--scene-translate-y),
+      var(--responsive-scene-translate-x, var(--scene-translate-x)),
+      var(--responsive-scene-translate-y, var(--scene-translate-y)),
       0
     )
-    scale(var(--scene-scale));
+    scale(var(--responsive-scene-scale, var(--scene-scale)));
   transform-origin: center;
   transition: transform var(--duration-slow) var(--ease-calm);
   will-change: transform;
@@ -146,6 +146,14 @@
 @media (max-width: 900px) {
   .sceneCamera {
     width: min(95vw, 120vh);
+  }
+}
+
+@media (max-width: 600px) {
+  .sceneCamera[data-landmark="works"] {
+    --responsive-scene-scale: 1.72;
+    --responsive-scene-translate-x: 14%;
+    --responsive-scene-translate-y: 68%;
   }
 }
 

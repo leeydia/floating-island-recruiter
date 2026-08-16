@@ -21,7 +21,8 @@
   border: 0;
   background: transparent;
   cursor: pointer;
-  transform: translate(-50%, -50%) scale(var(--node-scale));
+  transform: translate(-50%, -50%)
+    scale(calc(var(--node-scale) * var(--node-responsive-scale, 1)));
   transition: transform var(--duration-fast) var(--ease-calm);
 }
 
@@ -146,7 +147,11 @@
 .node:hover,
 .node:focus-visible {
   transform: translate(-50%, -50%)
-    scale(calc(var(--node-scale) * 1.06));
+    scale(
+      calc(
+        var(--node-scale) * var(--node-responsive-scale, 1) * 1.06
+      )
+    );
 }
 
 .node:hover .iconSurface,
@@ -201,5 +206,19 @@
   .node {
     min-width: 5.5rem;
     min-height: 5.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .node {
+    top: var(--node-mobile-y, var(--node-y));
+    left: var(--node-mobile-x, var(--node-x));
+  }
+
+  .label {
+    transform: translate(
+      var(--content-node-mobile-label-x),
+      var(--content-node-mobile-label-y)
+    );
   }
 }

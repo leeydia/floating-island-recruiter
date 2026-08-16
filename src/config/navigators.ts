@@ -30,6 +30,7 @@ export const NAVIGATORS: NavigatorConfig[] = [
     landmark: "Outdoor Theatre",
     anchor: { x: 63, y: 31 },
     labelPosition: { x: 74, y: 11.5 },
+    mobileLabelPosition: { x: 74, y: 4 },
   },
   {
     id: "about",

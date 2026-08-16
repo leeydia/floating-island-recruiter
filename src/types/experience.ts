@@ -47,6 +47,11 @@ export interface Position {
   y: number;
 }
 
+export interface MobileLabelOffset {
+  x?: number;
+  y?: number;
+}
+
 export interface NavigatorConfig {
   id: LandmarkId;
   number: string;
@@ -54,4 +59,5 @@ export interface NavigatorConfig {
   landmark: string;
   anchor: Position;
   labelPosition: Position;
+  mobileLabelPosition?: Position;
 }
