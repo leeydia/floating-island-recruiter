@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import favicon from "./favicon.png";
 import "@/styles/tokens.css";
 import "./globals.css";
 
@@ -21,6 +22,13 @@ export const metadata: Metadata = {
   title: "Leeydia's Floating Island",
   description:
     "An interactive 2.5D portfolio exploring Leeydia Lau's work, experiences, and curiosity.",
+  icons: {
+    icon: {
+      url: favicon.src,
+      type: "image/png",
+      sizes: "512x512",
+    },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

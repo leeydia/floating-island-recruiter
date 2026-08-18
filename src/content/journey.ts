@@ -153,7 +153,7 @@ export const RESUME_INTRODUCTION =
   "A formal overview of my experience, education, skills, and professional journey.";
 
 export const RESUME_VIEW_URL =
-  "https://drive.google.com/file/d/1aQnms60ic_ew42rExNWnrweK5GTONyBZ/view?usp=sharing";
+  "/document/LauLeeYdia_Resume.pdf";
 
 export const RESUME_DOWNLOAD_URL =
-  "https://drive.google.com/uc?export=download&id=1aQnms60ic_ew42rExNWnrweK5GTONyBZ";
+  "/document/LauLeeYdia_Resume.pdf";

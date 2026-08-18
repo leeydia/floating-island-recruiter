@@ -30,7 +30,7 @@ export function ResumeActions() {
       </div>
 
       <p className={styles.note}>
-        The approved résumé is hosted externally and opens in a new browser tab.
+        The approved résumé is available here as a PDF and opens in a new browser tab.
       </p>
     </div>
   );
