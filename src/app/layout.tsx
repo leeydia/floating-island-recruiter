@@ -29,6 +29,14 @@ export const metadata: Metadata = {
       sizes: "512x512",
     },
   },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
