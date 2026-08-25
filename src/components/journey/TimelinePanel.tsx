@@ -5,11 +5,12 @@ import {
   TIMELINE_CLOSING,
   TIMELINE_ENTRIES,
   type TimelineEntry,
+  type TimelineRelatedAction,
 } from "@/content/journey";
 import styles from "./TimelinePanel.module.css";
 
 interface TimelinePanelProps {
-  onNavigate: (landmark: "works" | "exploration") => void;
+  onNavigate: (action: TimelineRelatedAction) => void;
 }
 
 function TimelineItem({
@@ -17,10 +18,11 @@ function TimelineItem({
   onNavigate,
 }: {
   entry: TimelineEntry;
-  onNavigate: (landmark: "works" | "exploration") => void;
+  onNavigate: (action: TimelineRelatedAction) => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   const detailsId = `timeline-details-${entry.id}`;
+  const relatedAction = entry.relatedAction;
 
   return (
     <article className={styles.entry}>
@@ -64,14 +66,16 @@ function TimelineItem({
             <p>{entry.reflection}</p>
           </div>
 
-          <button
-            type="button"
-            className={styles.relatedAction}
-            onClick={() => onNavigate(entry.relatedAction.landmark)}
-          >
-            {entry.relatedAction.label}
-            <span aria-hidden="true">→</span>
-          </button>
+          {relatedAction ? (
+            <button
+              type="button"
+              className={styles.relatedAction}
+              onClick={() => onNavigate(relatedAction)}
+            >
+              {relatedAction.label}
+              <span aria-hidden="true">→</span>
+            </button>
+          ) : null}
         </div>
       </div>
     </article>

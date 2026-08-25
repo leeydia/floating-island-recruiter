@@ -1,3 +1,17 @@
+import type { WorksContentItemId } from "@/types/experience";
+
+export type TimelineRelatedAction =
+  | {
+      label: string;
+      landmark: "works";
+      contentItem?: WorksContentItemId;
+    }
+  | {
+      label: string;
+      landmark: "exploration";
+      contentItem?: never;
+    };
+
 export interface TimelineEntry {
   id: string;
   date: string;
@@ -8,10 +22,7 @@ export interface TimelineEntry {
   details: string[];
   reflectionLabel: "What I carried forward" | "Where I am heading";
   reflection: string;
-  relatedAction: {
-    label: string;
-    landmark: "works" | "exploration";
-  };
+  relatedAction?: TimelineRelatedAction;
 }
 
 export const TIMELINE_INTRODUCTION =
@@ -37,6 +48,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     relatedAction: {
       label: "View Architecture Work",
       landmark: "works",
+      contentItem: "works-academic-portfolio",
     },
   },
   {
@@ -55,10 +67,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     reflectionLabel: "What I carried forward",
     reflection:
       "A greater awareness of the process required to turn an idea into something tangible.",
-    relatedAction: {
-      label: "View Architecture Work",
-      landmark: "works",
-    },
   },
   {
     id: "assistant-architect",
@@ -76,10 +84,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     reflectionLabel: "What I carried forward",
     reflection:
       "The ability to work creatively within constraints while keeping ideas clear and buildable.",
-    relatedAction: {
-      label: "View Architecture Work",
-      landmark: "works",
-    },
   },
   {
     id: "brand-experience",
@@ -123,6 +127,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     relatedAction: {
       label: "View 3D Visualisation Work",
       landmark: "works",
+      contentItem: "works-visualization",
     },
   },
   {

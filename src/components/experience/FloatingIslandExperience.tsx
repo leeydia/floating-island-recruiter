@@ -26,7 +26,7 @@ import { CONTACT_PANEL_OPEN_DELAY_MS } from "@/config/contact";
 import { EXPLORATION_NODES } from "@/config/exploration";
 import { JOURNEY_PANEL_OPEN_DELAY_MS } from "@/config/journey";
 import { NAVIGATORS } from "@/config/navigators";
-import { PARALLAX } from "@/config/scene";
+import { PARALLAX, TRANSITION_DURATION_MS } from "@/config/scene";
 import { WORKS_NODES } from "@/config/works";
 import {
   ABOUT_PANEL_INTRODUCTION,
@@ -37,7 +37,10 @@ import {
   AI_PANEL_INTRODUCTION,
   PHOTOGRAPHY_PANEL_INTRODUCTION,
 } from "@/content/exploration";
-import { TIMELINE_INTRODUCTION } from "@/content/journey";
+import {
+  TIMELINE_INTRODUCTION,
+  type TimelineRelatedAction,
+} from "@/content/journey";
 import { WORKS_CONTENT } from "@/content/works";
 import { useExperience } from "@/context/ExperienceContext";
 import { useAssetPreloader } from "@/hooks/useAssetPreloader";
@@ -67,6 +70,7 @@ export function FloatingIslandExperience() {
   const lastContentItemRef = useRef<ContentItemId | null>(null);
   const lastAutomaticDestinationRef = useRef<LandmarkId | null>(null);
   const overviewFocusTargetRef = useRef<LandmarkId | null>(null);
+  const pendingWorksContentRef = useRef<WorksContentItemId | null>(null);
   const latestExperienceRef = useRef({
     experienceState: "welcome",
     selectedLandmark: null as LandmarkId | null,
@@ -308,6 +312,37 @@ export function FloatingIslandExperience() {
   ]);
 
   useEffect(() => {
+    const pendingContentItem = pendingWorksContentRef.current;
+    if (!pendingContentItem) return;
+
+    if (!isLandmarkView || selectedLandmark !== "works") {
+      pendingWorksContentRef.current = null;
+      return;
+    }
+
+    const timerId = window.setTimeout(
+      () => {
+        const latestExperience = latestExperienceRef.current;
+        if (
+          pendingWorksContentRef.current !== pendingContentItem ||
+          latestExperience.experienceState !== "landmark-view" ||
+          latestExperience.selectedLandmark !== "works"
+        ) {
+          pendingWorksContentRef.current = null;
+          return;
+        }
+
+        pendingWorksContentRef.current = null;
+        lastContentItemRef.current = pendingContentItem;
+        openContentPanel(pendingContentItem);
+      },
+      reducedMotion ? 300 : TRANSITION_DURATION_MS.slow,
+    );
+
+    return () => window.clearTimeout(timerId);
+  }, [isLandmarkView, openContentPanel, reducedMotion, selectedLandmark]);
+
+  useEffect(() => {
     if (!isIslandOverview || !overviewFocusTargetRef.current) return;
 
     const landmark = NAVIGATORS.find(
@@ -328,9 +363,10 @@ export function FloatingIslandExperience() {
   }, [isIslandOverview]);
 
   const handleTimelineNavigate = useCallback(
-    (landmark: "works" | "exploration") => {
+    (action: TimelineRelatedAction) => {
       lastContentItemRef.current = null;
-      selectNavigator(landmark);
+      pendingWorksContentRef.current = action.contentItem ?? null;
+      selectNavigator(action.landmark);
     },
     [selectNavigator],
   );
