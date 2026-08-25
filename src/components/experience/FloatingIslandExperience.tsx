@@ -20,6 +20,7 @@ import { PhotographyPanel } from "@/components/exploration/PhotographyPanel";
 import { TimelinePanel } from "@/components/journey/TimelinePanel";
 import { WorksLegend } from "@/components/works/WorksLegend";
 import { WorksPanel } from "@/components/works/WorksPanel";
+import { VisualizationPanel } from "@/components/works/VisualizationPanel";
 import { ABOUT_NODES } from "@/config/about";
 import { CONTACT_PANEL_OPEN_DELAY_MS } from "@/config/contact";
 import { EXPLORATION_NODES } from "@/config/exploration";
@@ -543,7 +544,9 @@ export function FloatingIslandExperience() {
           onClose={handleCloseContentPanel}
           onReturnToWelcome={returnToWelcome}
         >
-          {worksContent ? (
+          {worksContent?.kind === "visualization-workflow" ? (
+            <VisualizationPanel content={worksContent} />
+          ) : worksContent?.kind === "projects" ? (
             <WorksPanel content={worksContent} />
           ) : isAiContent ? (
             <AIExplorationPanel />

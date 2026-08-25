@@ -32,11 +32,15 @@ export interface WorksProject {
   details?: WorksDetailSection[];
 }
 
-export interface WorksPanelContent {
+interface WorksContentBase {
   id: WorksContentItemId;
   title: string;
   category: WorksCategory;
   introduction: string;
+}
+
+export interface WorksPanelContent extends WorksContentBase {
+  kind: "projects";
   metadata?: string[];
   workflow?: string;
   projects: WorksProject[];
@@ -47,6 +51,33 @@ export interface WorksPanelContent {
     note: string;
   };
 }
+
+export type VisualizationWorkflowIcon =
+  | "plan"
+  | "layers"
+  | "camera"
+  | "render"
+  | "deliver";
+
+export interface VisualizationWorkflowStep {
+  number: string;
+  icon: VisualizationWorkflowIcon;
+  title: string;
+  description: string;
+}
+
+export interface VisualizationPanelContent extends WorksContentBase {
+  kind: "visualization-workflow";
+  category: "visualization";
+  steps: VisualizationWorkflowStep[];
+  tools: string[];
+  commercialWork: {
+    heading: string;
+    text: string;
+  };
+}
+
+export type WorksContent = WorksPanelContent | VisualizationPanelContent;
 
 export const WORKS_LANDMARK_INTRODUCTION =
   "Selected projects across architecture, branding, and 3D visualisation.";
@@ -71,25 +102,9 @@ const brandingMedia = (
   height,
 });
 
-const visualizationMedia = (
-  folder: "Township & Aerial" | "Exterior" | "Landscape",
-  file: string,
-  alt: string,
-  width: number,
-  height: number,
-): WorksMedia => ({
-  src: `/media/3D-visualization/${encodeURIComponent(folder)}/${file}.webp`,
-  alt,
-  width,
-  height,
-});
-
-const VISUALIZATION_STUDIO_CREDIT = "4D Studio";
-const VISUALIZATION_CLOSING =
-  "Selected visualisations are presented as examples of my professional work. Project and development rights remain with the respective developers, clients, employers, and rights holders. Images are used for portfolio presentation only.";
-
-export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
+export const WORKS_CONTENT: Record<WorksContentItemId, WorksContent> = {
   "works-academic-portfolio": {
+    kind: "projects",
     id: "works-academic-portfolio",
     title: "Academic Portfolio",
     category: "architecture",
@@ -247,6 +262,7 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
     },
   },
   "works-branding-fnb": {
+    kind: "projects",
     id: "works-branding-fnb",
     title: "F&B",
     category: "branding",
@@ -344,6 +360,7 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
     ],
   },
   "works-branding-retail-lifestyle": {
+    kind: "projects",
     id: "works-branding-retail-lifestyle",
     title: "Retail & Lifestyle",
     category: "branding",
@@ -389,91 +406,54 @@ export const WORKS_CONTENT: Record<WorksContentItemId, WorksPanelContent> = {
       },
     ],
   },
-  "works-visualization-township-aerial": {
-    id: "works-visualization-township-aerial",
-    title: "Township & Aerial",
+  "works-visualization": {
+    kind: "visualization-workflow",
+    id: "works-visualization",
+    title: "3D Architectural Visualization",
     category: "visualization",
     introduction:
-      "Large-scale aerial visualisations that combine architectural models with real-world site context, terrain, and aerial photography.",
-    metadata: ["3D Visualisation", "3D Artist"],
-    workflow: "Google Earth → Camera Brief → Aerial / Drone / Helicopter Photography → Blender → 3ds Max → V-Ray → Photoshop",
-    projects: [
-      visualizationProject("donnybrook-aerial", "Donnybrook Acclaim", "Yourland Developments", "Donnybrook VIC, Australia", "A large-scale township visualisation showcasing the development as a connected community, bringing together residential neighbourhoods, local parks, a sports centre, community facilities and schools within the wider masterplan.", [
-        visualizationMedia("Township & Aerial", "donnybrook-acclaim_aerial", "Donnybrook Acclaim aerial render", 3000, 2250),
-        visualizationMedia("Township & Aerial", "donnybrook-acclaim_topdown", "Donnybrook Acclaim top-down aerial render", 3000, 3000),
-      ]),
-      visualizationProject("plumpton", "Plumpton", "Yourland Developments", "Plumpton VIC, Australia", "A township-scale visualisation illustrating how residential neighbourhoods sit alongside parks, schools, community facilities and recreational spaces, presenting the development as a complete and connected place to live.", [
-        visualizationMedia("Township & Aerial", "Plumpton_aerial", "Plumpton aerial render", 2500, 1667),
-        visualizationMedia("Township & Aerial", "Plumpton_topdown", "Plumpton top-down aerial render", 2500, 2500),
-      ]),
+      "Over 2 years of professional experience translating architectural information into visual narratives using 3ds Max, V-Ray and Photoshop.",
+    steps: [
+      {
+        number: "01",
+        icon: "plan",
+        title: "Understand",
+        description:
+          "Review architectural drawings, CAD/Revit models, references and project requirements.",
+      },
+      {
+        number: "02",
+        icon: "layers",
+        title: "Build & Coordinate",
+        description:
+          "Prepare and coordinate 3D geometry, materials, landscape and architectural elements.",
+      },
+      {
+        number: "03",
+        icon: "camera",
+        title: "Art Direct",
+        description:
+          "Develop composition, camera language, materials, lighting and atmosphere to translate design intent into a clear visual narrative.",
+      },
+      {
+        number: "04",
+        icon: "render",
+        title: "Render & Refine",
+        description:
+          "Produce high-quality renders through V-Ray, followed by Photoshop post-production and refinement.",
+      },
+      {
+        number: "05",
+        icon: "deliver",
+        title: "Iterate & Deliver",
+        description:
+          "Incorporate feedback, resolve visual and technical issues, and prepare final imagery for delivery.",
+      },
     ],
-    closingNote: VISUALIZATION_CLOSING,
-  },
-  "works-visualization-exterior": {
-    id: "works-visualization-exterior",
-    title: "Exterior",
-    category: "visualization",
-    introduction:
-      "Selected exterior visualisations showcasing architecture and outdoor environments across different scales—from building-focused views to town centres and amenity spaces.",
-    metadata: ["3D Visualisation", "3D Artist"],
-    workflow: "AutoCAD → 3ds Max → V-Ray → Photoshop",
-    projects: [
-      visualizationProject("thyme-forster", "Thyme Forster", "Serenitas Management", "Forster NSW, Australia", "A close-up exterior visualisation focused on architectural, material and landscape detail. The surrounding context was created through photomontage using a photographer’s 360° panorama—bringing a workflow more commonly used in aerial imagery into a street-level perspective.", [
-        visualizationMedia("Exterior", "thyme-forster_streetscape", "Thyme Forster streetscape render", 2500, 1250),
-        visualizationMedia("Exterior", "thyme-forster_swimming-pool", "Thyme Forster swimming pool render", 2500, 1250),
-      ]),
-      visualizationProject("donnybrook-exterior", "Donnybrook Acclaim", "Yourland Developments", "Donnybrook VIC, Australia", "A close-up visualisation of the town centre and sports centre public spaces, with particular focus on landscape and community space planning. The project allowed greater creative freedom in shaping the layouts, making it an opportunity to explore how these shared spaces could feel active, welcoming and lived-in.", [
-        visualizationMedia("Exterior", "donnybrook-acclaim_towncentre", "Donnybrook Acclaim town centre render", 2500, 1250),
-        visualizationMedia("Exterior", "donnybrook-acclaim_sportcentre", "Donnybrook Acclaim sport centre render", 2500, 1500),
-      ]),
-    ],
-    closingNote: VISUALIZATION_CLOSING,
-  },
-  "works-visualization-landscape": {
-    id: "works-visualization-landscape",
-    title: "Landscape",
-    category: "visualization",
-    introduction:
-      "Selected park visualisations focused on landscape, greenery, public space, and the experience of outdoor environments.",
-    metadata: ["3D Visualisation", "3D Artist"],
-    workflow: "AutoCAD → 3ds Max → V-Ray → Photoshop",
-    projects: [
-      visualizationProject("maple-grove", "Maple Grove", "Satterley Property Group", "Katoomba NSW, Australia", "A landscape-focused visualisation requiring close attention to planting composition and species accuracy. Working from the landscape designer’s documentation, planting was carefully placed and balanced using Forest Pack to stay true to the design while creating a natural and visually cohesive landscape.", [
-        visualizationMedia("Landscape", "maplegrove-park_000", "Maple Grove park render", 2500, 1876),
-        visualizationMedia("Landscape", "maplegrove-park_001", "Maple Grove park render", 2500, 1407),
-        visualizationMedia("Landscape", "maplegrove-park_002", "Maple Grove park render", 2500, 1499),
-        visualizationMedia("Landscape", "maplegrove-park_003", "Maple Grove park render", 2500, 1499),
-      ]),
-      visualizationProject("donnybrook-landscape", "Donnybrook Acclaim", "Yourland Developments", "Donnybrook VIC, Australia", "A detailed landscape visualisation developed closely from the landscape designer’s planting documentation. Using Forest Pack, plant species and placement were carefully coordinated to reflect the specified landscape design while refining density, variation and composition for a convincing final image", [
-        visualizationMedia("Landscape", "donnybrook-acclaim_park000", "Donnybrook Acclaim park render", 2500, 1250),
-        visualizationMedia("Landscape", "donnybrook-acclaim_park001", "Donnybrook Acclaim park render", 2500, 2083),
-        visualizationMedia("Landscape", "donnybrook-acclaim_creek", "Donnybrook Acclaim creek render", 2500, 1406),
-      ]),
-    ],
-    closingNote: VISUALIZATION_CLOSING,
+    tools: ["3ds Max", "V-Ray", "Photoshop", "AutoCAD", "Revit"],
+    commercialWork: {
+      heading: "Commercial Work",
+      text: "Selected professional projects are not displayed publicly in respect of client and project confidentiality. Further details about my role and experience can be discussed during the interview process.",
+    },
   },
 };
-
-function visualizationProject(
-  id: string,
-  name: string,
-  client: string,
-  location: string,
-  introduction: string,
-  media: WorksMedia[],
-): WorksProject {
-  return {
-    id,
-    name,
-    tags: [location],
-    summary: `${name} · ${location}`,
-    location,
-    introduction,
-    media,
-    credits: [
-      { label: "Role", value: "3D Artist" },
-      { label: "Studio / Employer", value: VISUALIZATION_STUDIO_CREDIT },
-      { label: "Client", value: client },
-    ],
-  };
-}

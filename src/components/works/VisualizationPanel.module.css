@@ -1,0 +1,147 @@
+.visualization {
+  color: var(--color-text-primary);
+}
+
+.sectionLabel,
+.tools h2,
+.commercialWork h2 {
+  font-size: 0.56rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.workflow > h2 {
+  max-width: 30rem;
+  margin-top: 0.45rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.55rem);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.75rem, 4vw, 2.75rem) clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(2.25rem, 5vh, 3.5rem);
+  list-style: none;
+}
+
+.step {
+  min-width: 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(61, 92, 74, 0.17);
+}
+
+.step:last-child {
+  grid-column: 1 / -1;
+  max-width: calc(50% - 0.75rem);
+}
+
+.stepMarker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.number {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  color: var(--color-text-muted);
+}
+
+.icon {
+  display: grid;
+  width: 2.45rem;
+  height: 2.45rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(93, 137, 109, 0.34);
+  border-radius: 50%;
+  color: #5d896d;
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.icon svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.stepContent {
+  margin-top: 1rem;
+}
+
+.stepContent h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.stepContent p {
+  margin-top: 0.55rem;
+  font-size: clamp(0.76rem, 1vw, 0.86rem);
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+}
+
+.tools {
+  margin-top: clamp(3rem, 7vh, 5rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(61, 92, 74, 0.14);
+}
+
+.tools p {
+  margin-top: 0.55rem;
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.035em;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.commercialWork {
+  margin-top: clamp(2.5rem, 5vh, 3.5rem);
+  padding: 1.1rem 1.2rem;
+  border-left: 2px solid rgba(93, 137, 109, 0.45);
+  background: rgba(224, 230, 222, 0.28);
+}
+
+.commercialWork h2 {
+  color: var(--color-forest-green);
+}
+
+.commercialWork p {
+  max-width: 39rem;
+  margin-top: 0.55rem;
+  font-size: 0.76rem;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+}
+
+@media (max-width: 599px) {
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .step:last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .commercialWork {
+    padding: 1rem;
+  }
+}

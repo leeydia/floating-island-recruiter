@@ -17,9 +17,7 @@ export type WorksContentItemId =
   | "works-academic-portfolio"
   | "works-branding-fnb"
   | "works-branding-retail-lifestyle"
-  | "works-visualization-township-aerial"
-  | "works-visualization-exterior"
-  | "works-visualization-landscape";
+  | "works-visualization";
 
 export type ExplorationContentItemId =
   | "exploration-ai"
